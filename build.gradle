@@ -31,8 +31,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
-    compile group: 'org.springframework.data', name: 'spring-data-jpa'
-    compile group: 'org.springframework.data', name: 'spring-data-commons'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
 
     runtime group: 'org.springframework.boot', name: 'spring-boot-devtools'
     runtime group: 'mysql', name: 'mysql-connector-java'
