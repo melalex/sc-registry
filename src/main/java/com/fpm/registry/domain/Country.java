@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "country")
+@Table(name = "country", indexes = @Index(name = "name_index", columnList = "name", unique = true))
 public class Country {
 
     @Id

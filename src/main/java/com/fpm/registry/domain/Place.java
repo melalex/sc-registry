@@ -10,12 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "place")
+@Table(name = "place", indexes = @Index(name = "name_index", columnList = "name", unique = true))
 public class Place {
 
     @Id

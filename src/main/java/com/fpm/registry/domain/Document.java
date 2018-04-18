@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -14,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,7 +26,7 @@ import javax.persistence.TemporalType;
 
 @Data
 @Entity
-@Table(name = "document")
+@Table(name = "document", indexes = @Index(name = "name_index", columnList = "name", unique = true))
 @EntityListeners(AuditingEntityListener.class)
 public class Document {
 
@@ -54,6 +56,6 @@ public class Document {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
     private User employee;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "document")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "document", cascade = CascadeType.ALL)
     private Media media;
 }
