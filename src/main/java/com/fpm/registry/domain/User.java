@@ -48,7 +48,7 @@ public class User {
     private Set<Role> roles;
 
     private enum Role {
-        ADMIN,
-        REGULAR
+        ROLE_ADMIN,
+        ROLE_USER
     }
 }
