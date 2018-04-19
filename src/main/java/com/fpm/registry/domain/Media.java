@@ -23,7 +23,7 @@ public class Media {
     private String name;
 
     @Column
-    private String link;
+    private String path;
 
     @Column(length = 40)
     private String type;

@@ -1,12 +1,12 @@
 package com.fpm.registry.services;
 
 import com.fpm.registry.domain.Media;
-import org.springframework.core.io.Resource;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 public interface MediaService {
 
-    Media save(MultipartFile multipartFile);
+    Media getMedia(String name, String type);
 
-    Resource getByName(String name);
+    File getFile(Long id);
 }
