@@ -8,6 +8,7 @@ import com.fpm.registry.services.strategy.NamingStrategy;
 import com.fpm.registry.utils.Exceptions;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -17,9 +18,15 @@ import java.nio.file.Paths;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class MediaServiceImpl implements MediaService {
+
+    private static final String INIT_MESSAGE =
+            "Media service initialized successfully. File storage path is [{}], recycle bin path is [{}]";
+    private static final String DELETE_MESSAGE = "Deleting media [[{}]. Moved from [{}] to [{}]";
+    private static final String NEW_MEDIA_MESSAGE = "Created new Media: {}";
 
     private MediaRepository mediaRepository;
     private NamingStrategy namingStrategy;
@@ -36,6 +43,8 @@ public class MediaServiceImpl implements MediaService {
 
         Files.createDirectories(fileStorage);
         Files.createDirectories(recycleBin);
+
+        log.info(INIT_MESSAGE, fileStorage, recycleBin);
     }
 
     @Override
@@ -79,12 +88,17 @@ public class MediaServiceImpl implements MediaService {
         media.setStatus(Media.Status.DELETED);
 
         Files.move(oldPath, newPath);
+
+        log.info(DELETE_MESSAGE, media.getId(), oldPath, newPath);
+
         mediaRepository.save(media);
     }
 
     @Override
     public MediaAndFile prepareUpdate(Media media, String name, String type) {
         var newMedia = createMedia(name, type);
+
+        log.info(NEW_MEDIA_MESSAGE, media);
 
         if (Objects.nonNull(media)) {
             delete(media);

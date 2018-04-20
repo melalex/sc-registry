@@ -1,7 +1,5 @@
 package com.fpm.registry.services.impl;
 
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
-
 import com.fpm.registry.domain.Document;
 import com.fpm.registry.domain.User;
 import com.fpm.registry.repositories.DocumentRepository;
@@ -10,19 +8,22 @@ import com.fpm.registry.services.MediaService;
 import com.fpm.registry.services.UserService;
 import com.fpm.registry.utils.Exceptions;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class DocumentServiceImpl implements DocumentService {
 
-    private static final String NAME_FIELD = "name";
+    private static final String NEW_DOCUMENT_MESSAGE = "Created new Document: {}";
+    private static final String UPDATE_DOCUMENT_MESSAGE = "Updated Document: {}";
+    private static final String GET_BY_USER_AND_NAME_MESSAGE = "Searching Documents by employee [{}] and name [{}]";
+    private static final String GET_BY_NAME_MESSAGE = "Searching Documents by name [{}]";
 
     private DocumentRepository documentRepository;
     private UserService userService;
@@ -33,7 +34,12 @@ public class DocumentServiceImpl implements DocumentService {
         document.setId(null);
         document.setStatus(Document.Status.INITIAL);
 
-        return documentRepository.save(document);
+        var savedDocument = documentRepository.save(document);
+
+        log.info(NEW_DOCUMENT_MESSAGE, savedDocument.getId());
+        log.debug(NEW_DOCUMENT_MESSAGE, savedDocument);
+
+        return savedDocument;
     }
 
     @Override
@@ -52,7 +58,12 @@ public class DocumentServiceImpl implements DocumentService {
             throw Exceptions.notFound(Document.class, id);
         }
 
-        return documentRepository.save(document);
+        var savedDocument = documentRepository.save(document);
+
+        log.info(UPDATE_DOCUMENT_MESSAGE, savedDocument.getId());
+        log.debug(UPDATE_DOCUMENT_MESSAGE, savedDocument);
+
+        return savedDocument;
     }
 
     @Override
@@ -75,19 +86,21 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public Page<Document> getByNameStarts(String name, Pageable pageable) {
-        return getByUserAndNameStartsWith(null, name, pageable);
+        log.trace(GET_BY_NAME_MESSAGE, name);
+
+        return documentRepository.findAllNameStartingWith(name, pageable);
     }
 
     @Override
     public Page<Document> getByNameStartsForCurrentUser(String name, Pageable pageable) {
+
         return getByUserAndNameStartsWith(userService.getCurrentUser(), name, pageable);
     }
 
     @Override
     public Page<Document> getByUserAndNameStartsWith(User user, String name, Pageable pageable) {
-        var matcher = ExampleMatcher.matching().withMatcher(NAME_FIELD, startsWith());
-        var document = new Document();
+        log.trace(GET_BY_USER_AND_NAME_MESSAGE, user.getLogin(), name);
 
-        return documentRepository.findAll(Example.of(document, matcher), pageable);
+        return documentRepository.findAllByEmployeeAndNameStartingWith(user, name, pageable);
     }
 }

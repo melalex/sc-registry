@@ -6,11 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
-import java.util.stream.Stream;
+import java.util.Set;
 
 public interface TagRepository extends JpaRepository<Tag, Long> {
 
-    Stream<Tag> streamDistinctByNameIn(Collection<String> names);
+    Set<Tag> findAllByNameIn(Collection<String> names);
 
     Page<Tag> findAllByNameStartingWith(String name, Pageable pageable);
 }
