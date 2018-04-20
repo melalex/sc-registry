@@ -17,7 +17,7 @@ public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(length = 3)
     private String iso;

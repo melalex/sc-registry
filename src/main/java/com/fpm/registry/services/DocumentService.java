@@ -1,6 +1,7 @@
 package com.fpm.registry.services;
 
 import com.fpm.registry.domain.Document;
+import com.fpm.registry.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +16,6 @@ public interface DocumentService {
     Page<Document> getByNameStarts(String name, Pageable pageable);
 
     Page<Document> getByNameStartsForCurrentUser(String name, Pageable pageable);
+
+    Page<Document> getByUserAndNameStartsWith(User user, String name, Pageable pageable);
 }

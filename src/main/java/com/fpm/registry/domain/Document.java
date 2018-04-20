@@ -1,6 +1,9 @@
 package com.fpm.registry.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -26,14 +29,17 @@ import javax.persistence.TemporalType;
 
 @Data
 @Entity
-@Table(name = "document", indexes = @Index(name = "name_index", columnList = "name", unique = true))
+@NoArgsConstructor
+@RequiredArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "document", indexes = @Index(name = "name_index", columnList = "name", unique = true))
 public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
+    @NonNull
     @Column(length = 40)
     private String name;
 
@@ -52,6 +58,7 @@ public class Document {
     @Temporal(TemporalType.DATE)
     private LocalDate date;
 
+    @NonNull
     @CreatedBy
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
     private User employee;
