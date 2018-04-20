@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.time.Clock;
+
 @EntityScan
 @EnableJpaAuditing
 @EnableJpaRepositories
@@ -23,5 +25,10 @@ public class RegistryApplication {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    @Bean
+    public Clock clock() {
+        return Clock.systemDefaultZone();
     }
 }

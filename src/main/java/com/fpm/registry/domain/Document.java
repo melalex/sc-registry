@@ -2,7 +2,6 @@ package com.fpm.registry.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,14 +33,16 @@ import javax.persistence.TemporalType;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "document", indexes = @Index(name = "name_index", columnList = "name", unique = true))
+@Table(name = "document", indexes = @Index(name = "name_index", columnList = "name"))
 public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NonNull
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.INITIAL;
+
     @Column(length = 40)
     private String name;
 
@@ -58,11 +61,15 @@ public class Document {
     @Temporal(TemporalType.DATE)
     private LocalDate date;
 
-    @NonNull
     @CreatedBy
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
     private User employee;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "document", cascade = CascadeType.ALL)
-    private Media media;
+    private Media attachment;
+
+    public enum Status {
+        INITIAL,
+        ACTIVE
+    }
 }

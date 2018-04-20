@@ -1,0 +1,4 @@
+registry:
+  fileStorage:
+    root: /media
+    recycleBin: /media/recycleBin

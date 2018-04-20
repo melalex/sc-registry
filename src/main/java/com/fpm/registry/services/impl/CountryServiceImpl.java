@@ -15,7 +15,7 @@ public class CountryServiceImpl implements CountryService {
     private CountryRepository countryRepository;
 
     @Override
-    public Page<Country> getByNameStartsWith(final String name, final Pageable pageable) {
+    public Page<Country> getByNameStartsWith(String name, Pageable pageable) {
         return countryRepository.findAllByByNameStartsWith(name, pageable);
     }
 }

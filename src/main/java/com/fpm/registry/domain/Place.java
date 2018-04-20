@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "place", indexes = @Index(name = "name_index", columnList = "name", unique = true))
+@Table(name = "place", indexes = @Index(name = "name_index", columnList = "name"))
 public class Place {
 
     @Id
