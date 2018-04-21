@@ -1,11 +1,13 @@
 package com.fpm.registry.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 @Data
+@JsonIgnoreProperties(value = {"id", "date", "employee", "attachment"}, allowGetters = true)
 public class DocumentDto {
 
     private long id;
@@ -14,5 +16,5 @@ public class DocumentDto {
     private Set<String> tags;
     private LocalDate date;
     private UserDto employee;
-    private MediaDto media;
+    private MediaDto attachment;
 }
