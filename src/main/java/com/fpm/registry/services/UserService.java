@@ -5,4 +5,6 @@ import com.fpm.registry.domain.User;
 public interface UserService {
 
     User getCurrentUser();
+
+    User getCurrentUserOrNull();
 }

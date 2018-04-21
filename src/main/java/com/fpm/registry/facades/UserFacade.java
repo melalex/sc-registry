@@ -5,4 +5,6 @@ import com.fpm.registry.dto.UserDto;
 public interface UserFacade {
 
     UserDto getCurrentUser();
+
+    UserDto getCurrentUserOrNull();
 }

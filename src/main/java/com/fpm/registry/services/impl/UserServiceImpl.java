@@ -21,11 +21,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getCurrentUser() {
+        return getCurrentUserInternal().orElseThrow(Exceptions.unauthorized());
+    }
+
+    @Override
+    public User getCurrentUserOrNull() {
+        return getCurrentUserInternal().orElse(null);
+    }
+
+    private Optional<User> getCurrentUserInternal() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 
         return Optional.ofNullable(authentication)
                 .map(Authentication::getName)
-                .flatMap(userRepository::findOneByLogin)
-                .orElseThrow(Exceptions.unauthorized());
+                .flatMap(userRepository::findOneByLogin);
     }
 }

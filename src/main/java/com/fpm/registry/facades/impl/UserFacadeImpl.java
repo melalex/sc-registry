@@ -16,7 +16,13 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public UserDto getCurrentUser() {
-        var currentUser = userService.getCurrentUser();
-        return extendedMapper.map(currentUser, UserDto.class);
+        var current = userService.getCurrentUser();
+        return extendedMapper.map(current, UserDto.class);
+    }
+
+    @Override
+    public UserDto getCurrentUserOrNull() {
+        var current = userService.getCurrentUserOrNull();
+        return extendedMapper.map(current, UserDto.class);
     }
 }
