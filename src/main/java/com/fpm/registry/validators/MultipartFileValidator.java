@@ -20,7 +20,7 @@ public class MultipartFileValidator implements ConstraintValidator<ValidMultipar
 
     @Override
     public boolean isValid(MultipartFile value, ConstraintValidatorContext context) {
-        return isSupportedType(value) && isAllowedSize(value);
+        return isSupportedType(value) && isAllowedSize(value) && !value.isEmpty();
     }
 
     private boolean isSupportedType(MultipartFile value) {

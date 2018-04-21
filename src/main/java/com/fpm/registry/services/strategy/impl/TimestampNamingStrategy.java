@@ -2,12 +2,10 @@ package com.fpm.registry.services.strategy.impl;
 
 import com.fpm.registry.services.strategy.NamingStrategy;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
 
-@Component
 @AllArgsConstructor
 public class TimestampNamingStrategy implements NamingStrategy {
 

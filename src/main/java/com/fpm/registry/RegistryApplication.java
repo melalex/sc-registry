@@ -21,14 +21,4 @@ public class RegistryApplication {
     public static void main(String[] args) {
         SpringApplication.run(RegistryApplication.class, args);
     }
-
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
-
-    @Bean
-    public Clock clock() {
-        return Clock.systemDefaultZone();
-    }
 }
