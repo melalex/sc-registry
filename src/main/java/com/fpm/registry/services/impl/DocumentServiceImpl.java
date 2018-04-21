@@ -21,6 +21,7 @@ import java.io.File;
 public class DocumentServiceImpl implements DocumentService {
 
     private static final String NEW_DOCUMENT_MESSAGE = "Created new Document: {}";
+    private static final String COMMIT_DOCUMENT_MESSAGE = "Committing Document with id [{}]";
     private static final String UPDATE_DOCUMENT_MESSAGE = "Updated Document: {}";
     private static final String GET_BY_USER_AND_NAME_MESSAGE = "Searching Documents by employee [{}] and name [{}]";
     private static final String GET_BY_NAME_MESSAGE = "Searching Documents by name [{}]";
@@ -44,6 +45,8 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public Document commit(Long id) {
+        log.info(COMMIT_DOCUMENT_MESSAGE, id);
+
         var document = getById(id);
         document.setStatus(Document.Status.ACTIVE);
 
