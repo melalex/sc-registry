@@ -2,3 +2,6 @@ registry:
   fileStorage:
     root: /media
     recycleBin: /media/recycleBin
+  pagination:
+    defaultPage: 1
+    defaultPageSize: 20

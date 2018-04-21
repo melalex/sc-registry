@@ -20,4 +20,14 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     public String getRecycleBinPath() {
         return registryProperties.getFileStorage().getRecycleBin();
     }
+
+    @Override
+    public int defaultPage() {
+        return registryProperties.getPagination().getDefaultPage();
+    }
+
+    @Override
+    public int defaultPageSize() {
+        return registryProperties.getPagination().getDefaultPageSize();
+    }
 }

@@ -10,11 +10,19 @@ import org.springframework.stereotype.Component;
 public class RegistryProperties {
 
     private FileStorageProperties fileStorage;
+    private PaginationProperties pagination;
 
     @Data
     public class FileStorageProperties {
 
         private String root;
         private String recycleBin;
+    }
+
+    @Data
+    public class PaginationProperties {
+
+        private int defaultPage;
+        private int defaultPageSize;
     }
 }
