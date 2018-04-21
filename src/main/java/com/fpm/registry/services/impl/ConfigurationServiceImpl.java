@@ -30,4 +30,9 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     public int defaultPageSize() {
         return registryProperties.getPagination().getDefaultPageSize();
     }
+
+    @Override
+    public int maxPageSize() {
+        return registryProperties.getPagination().getMaxPageSize();
+    }
 }

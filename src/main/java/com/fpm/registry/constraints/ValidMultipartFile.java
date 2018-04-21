@@ -1,7 +1,6 @@
 package com.fpm.registry.constraints;
 
-
-import com.fpm.registry.validators.AtLeastOneSpecialCharacterValidator;
+import com.fpm.registry.validators.MultipartFileValidator;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -13,13 +12,17 @@ import javax.validation.Payload;
 
 @Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = AtLeastOneSpecialCharacterValidator.class)
+@Constraint(validatedBy = MultipartFileValidator.class)
 @Documented
-public @interface AtLeastOneSpecialCharacter {
+public @interface ValidMultipartFile {
 
-    String message() default "{constraints.atLeastOneSpecialCharacter}";
+    String message() default "{constraints.validMultipartFile}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+    String[] types() default {};
+
+    long size() default Long.MAX_VALUE;
 }

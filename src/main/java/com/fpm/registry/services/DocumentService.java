@@ -13,6 +13,8 @@ public interface DocumentService {
 
     Document commit(Long id);
 
+    void rollback(Long id);
+
     Document update(Document document);
 
     File updateAttachment(Long id, String name, String type);

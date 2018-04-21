@@ -9,4 +9,6 @@ public interface ConfigurationService {
     int defaultPage();
 
     int defaultPageSize();
+
+    int maxPageSize();
 }

@@ -1,9 +1,9 @@
 package com.fpm.registry.advices;
 
+import com.fpm.registry.annotations.ApiController;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.RestController;
 
-@ControllerAdvice(annotations = RestController.class)
+@ControllerAdvice(annotations = ApiController.class)
 public class ApiExceptionHandler {
 
 }

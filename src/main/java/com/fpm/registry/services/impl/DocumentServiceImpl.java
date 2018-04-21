@@ -55,6 +55,11 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
+    public void rollback(Long id) {
+        documentRepository.deleteById(id);
+    }
+
+    @Override
     public Document update(Document document) {
         var current = getById(document.getId());
 

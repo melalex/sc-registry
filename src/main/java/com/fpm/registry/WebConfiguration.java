@@ -21,8 +21,10 @@ public class WebConfiguration implements WebMvcConfigurer {
         var resolver = new PageableHandlerMethodArgumentResolver();
         var defaultPage = configurationService.defaultPage();
         var defaultPageSize = configurationService.defaultPageSize();
+        var maxPageSize = configurationService.maxPageSize();
 
         resolver.setOneIndexedParameters(true);
+        resolver.setMaxPageSize(maxPageSize);
         resolver.setFallbackPageable(PageRequest.of(defaultPage, defaultPageSize));
 
         argumentResolvers.add(resolver);

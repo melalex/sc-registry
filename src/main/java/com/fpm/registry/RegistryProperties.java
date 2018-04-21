@@ -24,5 +24,6 @@ public class RegistryProperties {
 
         private int defaultPage;
         private int defaultPageSize;
+        private int maxPageSize;
     }
 }

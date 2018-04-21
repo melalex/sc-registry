@@ -25,9 +25,13 @@ public class DocumentFacadeImpl implements DocumentFacade {
     }
 
     @Override
-    public DocumentDto commit(Long id) {
-        var committed = documentService.commit(id);
-        return extendedMapper.map(committed, DocumentDto.class);
+    public void commit(Long id) {
+        documentService.commit(id);
+    }
+
+    @Override
+    public void rollback(Long id) {
+        documentService.rollback();
     }
 
     @Override

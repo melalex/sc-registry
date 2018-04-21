@@ -10,7 +10,9 @@ public interface DocumentFacade {
 
     DocumentDto create(DocumentDto document);
 
-    DocumentDto commit(Long id);
+    void commit(Long id);
+
+    void rollback(Long id);
 
     DocumentDto update(DocumentDto document);
 
