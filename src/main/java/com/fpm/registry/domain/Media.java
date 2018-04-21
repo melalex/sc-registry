@@ -36,7 +36,7 @@ public class Media {
     @Column(length = 40)
     private String type;
 
-    public enum  Status {
+    public enum Status {
         ACTIVE,
         DELETED
     }

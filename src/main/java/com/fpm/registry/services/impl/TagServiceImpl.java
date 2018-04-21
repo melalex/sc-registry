@@ -3,6 +3,7 @@ package com.fpm.registry.services.impl;
 import com.fpm.registry.domain.Tag;
 import com.fpm.registry.repositories.TagRepository;
 import com.fpm.registry.services.TagService;
+import com.fpm.registry.utils.Tags;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.SetUtils;
@@ -25,11 +26,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public Set<Tag> getByNames(Set<String> names) {
         var persistedTags = tagRepository.findAllByNameIn(names);
-
-        var persistedTagsNames = persistedTags.stream()
-                .map(Tag::getName)
-                .collect(Collectors.toUnmodifiableSet());
-
+        var persistedTagsNames = Tags.getNames(persistedTags);
         var newTagsNames = SetUtils.difference(names, persistedTagsNames);
 
         log.debug(NEW_TAGS_MESSAGE, newTagsNames);
@@ -38,7 +35,6 @@ public class TagServiceImpl implements TagService {
                 .stream()
                 .map(Tag::new)
                 .collect(Collectors.toSet());
-
 
         tagRepository.saveAll(newTags);
 

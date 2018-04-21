@@ -13,6 +13,7 @@ public class RegistryProperties {
 
     @Data
     public class FileStorageProperties {
+
         private String root;
         private String recycleBin;
     }

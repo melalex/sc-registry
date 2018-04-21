@@ -58,10 +58,12 @@ public class Document {
     private Set<Tag> tags;
 
     @CreatedDate
+    @Column(updatable = false)
     @Temporal(TemporalType.DATE)
     private LocalDate date;
 
     @CreatedBy
+    @Column(updatable = false)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
     private User employee;
 

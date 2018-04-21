@@ -21,6 +21,7 @@ public interface MediaService {
 
     @Value(staticConstructor = "of")
     class MediaAndFile {
+
         private Media media;
         private File file;
     }
