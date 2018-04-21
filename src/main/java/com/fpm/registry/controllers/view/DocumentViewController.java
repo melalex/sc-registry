@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,13 +36,13 @@ public class DocumentViewController {
     }
 
     @GetMapping("/all")
-    public ModelAndView getByNameStarts(String name, Pageable pageable) {
+    public ModelAndView getByNameStarts(@RequestParam(required = false) String name, Pageable pageable) {
         var model = documentFacade.getByNameStarts(name, pageable);
         return Views.from(Views.DOCUMENT_LIST, model);
     }
 
     @GetMapping
-    public ModelAndView getByNameStartsForCurrentUser(String name, Pageable pageable) {
+    public ModelAndView getByNameStartsForCurrentUser(@RequestParam(required = false) String name, Pageable pageable) {
         var model = documentFacade.getByNameStartsForCurrentUser(name, pageable);
         return Views.from(Views.DOCUMENT_LIST, model);
     }

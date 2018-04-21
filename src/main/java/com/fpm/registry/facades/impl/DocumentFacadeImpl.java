@@ -31,7 +31,7 @@ public class DocumentFacadeImpl implements DocumentFacade {
 
     @Override
     public void rollback(Long id) {
-        documentService.rollback();
+        documentService.rollback(id);
     }
 
     @Override
