@@ -6,6 +6,7 @@ import com.fpm.registry.repositories.DocumentRepository;
 import com.fpm.registry.services.DocumentService;
 import com.fpm.registry.services.MediaService;
 import com.fpm.registry.services.UserService;
+import com.fpm.registry.utils.Beans;
 import com.fpm.registry.utils.Exceptions;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,13 +56,11 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public Document update(Document document) {
-        var id = document.getId();
+        var current = getById(document.getId());
 
-        if (documentRepository.existsById(id)) {
-            throw Exceptions.notFound(Document.class, id);
-        }
+        Beans.populateNotNull(document, current);
 
-        var savedDocument = documentRepository.save(document);
+        var savedDocument = documentRepository.save(current);
 
         log.info(UPDATE_DOCUMENT_MESSAGE, savedDocument.getId());
         log.debug(UPDATE_DOCUMENT_MESSAGE, savedDocument);
@@ -84,7 +83,7 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public Document getById(Long id) {
         return documentRepository.findById(id)
-                .orElseThrow(Exceptions.notFoundSupplier(Document.class, id));
+                .orElseThrow(Exceptions.notFound(Document.class, id));
     }
 
     @Override

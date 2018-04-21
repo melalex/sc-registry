@@ -65,7 +65,7 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public Media getMediaById(Long id) {
         return mediaRepository.findById(id)
-                .orElseThrow(Exceptions.notFoundSupplier(Media.class, id));
+                .orElseThrow(Exceptions.notFound(Media.class, id));
     }
 
     @Override

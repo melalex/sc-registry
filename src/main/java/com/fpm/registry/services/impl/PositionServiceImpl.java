@@ -31,6 +31,6 @@ public class PositionServiceImpl implements PositionService {
     public Position getByName(String name) {
         log.trace(GET_BY_NAME_MESSAGE, name);
         return positionRepository.findOneByName(name)
-                .orElseThrow(Exceptions.notFoundSupplier(Position.class, NAME_FIELD, name));
+                .orElseThrow(Exceptions.notFound(Position.class, NAME_FIELD, name));
     }
 }
