@@ -8,6 +8,7 @@ import com.fpm.registry.services.PositionService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 @Facade
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class PositionFacadeImpl implements PositionFacade {
     private ExtendedMapper extendedMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public Page<PositionDto> getAll(Pageable pageable) {
         return positionService.getAll(pageable)
                 .map(extendedMapper.mapperFor(PositionDto.class));

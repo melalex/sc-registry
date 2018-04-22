@@ -31,6 +31,10 @@ ext {
     modelMapperStarterVersion = '1.1.0'
     modelMapperVersion = '1.1.3'
     collectionValidatorVersion = '2.2.0'
+    jQueryVersion = '3.3.1'
+    bootstrapVersion = '4.1.0'
+    fontAwesomeVersion = '5.0.10'
+    popperJsVersion = '1.14.1'
 }
 
 dependencies {
@@ -48,6 +52,11 @@ dependencies {
     compile group: 'org.modelmapper', name: 'modelmapper', version: modelMapperVersion
     compile group: 'com.github.jmnarloch', name: 'modelmapper-spring-boot-starter', version: modelMapperStarterVersion
     compile group: 'cz.jirutka.validator', name: 'validator-collection', version: collectionValidatorVersion
+
+    compile group: 'org.webjars', name: 'jquery', version: jQueryVersion
+    compile group: 'org.webjars', name: 'bootstrap', version: bootstrapVersion
+    compile group: 'org.webjars', name: 'font-awesome', version: fontAwesomeVersion
+    compile group: 'org.webjars.bower', name: 'popper.js', version: popperJsVersion
 
     runtime group: 'org.springframework.boot', name: 'spring-boot-devtools'
     runtime group: 'mysql', name: 'mysql-connector-java'

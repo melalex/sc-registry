@@ -14,6 +14,7 @@ public class Views {
     public static final String DOCUMENT_LIST = "documentList";
     public static final String DOCUMENT_VIEW = "viewDocument";
     public static final String DOCUMENT_EDIT = "editDocument";
+    public static final String DOCUMENT_CREATE = "createDocument";
     public static final String SIGN_IN = "signIn";
     public static final String SIGN_UP = "signUp";
 

@@ -9,4 +9,8 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String position;
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }

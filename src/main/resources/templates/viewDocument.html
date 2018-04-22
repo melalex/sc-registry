@@ -1,10 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{views.document}">Document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+          crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/webjars/font-awesome/5.0.10/css/font-awesome.min.css}">
+
+    <link rel="stylesheet" href="../static/css/core.css" th:href="@{/css/core.css}"/>
+
 </head>
 <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Static header</a>
+        </div>
+    </div>
+</nav>
+
+<!--/*@thymesVar id="model" type="com.fpm.registry.dto.DocumentDto"*/-->
+<!--/*@thymesVar id="user" type="com.fpm.registry.dto.UserDto"*/-->
+<div class="container margit-top" layout:fragment="content">
+    <div class="text-center">
+        <h1 class="title" th:text="#{views.document}">Document</h1>
+        <hr/>
+    </div>
+
+    <div class="row main">
+        <div class="main-login main-center">
+            <form action="${pageContext.request.contextPath}/site/duty" accept-charset="UTF-8" method="post">
+
+                <div class="form-group">
+                    <label for="id" th:text="#{views.document.id}">
+                        Name
+                    </label>
+                    <div>
+                        <div class="input-group">
+                            <input class="form-control" name="id" id="id"
+                                   th:placeholder="#{views.document.id}"
+                                   th:value="${model.id}" readonly/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" th:text="#{views.document.name}">
+                        Name
+                    </label>
+                    <div>
+                        <div class="input-group">
+                            <input class="form-control" name="name" id="name"
+                                   th:placeholder="#{views.document.name}"
+                                   th:value="${model.name}"
+                                   th:readonly="${user.id} != ${model.employee.id}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" th:text="#{views.document.description}">
+                        Name
+                    </label>
+                    <div>
+                        <div class="input-group">
+                            <textarea class="form-control" name="description" id="description"
+                                      th:placeholder="#{views.document.description}"
+                                      th:value="${model.description}">
+
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags" th:text="#{views.document.tags}">
+                        Name
+                    </label>
+                    <div>
+                        <div class="input-group">
+                            <input class="form-control" name="tags" id="tags"
+                                   th:placeholder="#{views.document.tags}"
+                                   th:value="${model.tags}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="attachment" th:text="#{views.document.attachment}">
+                        Name
+                    </label>
+                    <div>
+                        <div class="input-group">
+                            <input type="file" class="form-control" name="attachment" id="attachment"
+                                   th:placeholder="#{views.document.attachment}"
+                                   th:value="${model.tags}">
+                        </div>
+                    </div>
+                </div>
+
+
+                <input class="btn btn-primary btn-lg btn-block login-button" type="submit"
+                       th:value="#{views.action.save}" value="Save">
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">&copy; Melashchenko, 2018</span>
+    </div>
+</footer>
 
 </body>
 </html>

@@ -6,3 +6,7 @@ registry:
     defaultPage: 1
     defaultPageSize: 20
     maxPageSize: 100
+
+spring:
+  messages:
+    basename: i18n/messages

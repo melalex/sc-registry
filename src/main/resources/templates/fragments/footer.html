@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title th:text="#{views.error.server}">Internal Server error</title>
+    <title>Footer</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet"
@@ -19,11 +19,11 @@
 </head>
 <body>
 
-<div class="text-center">
-    <h1 class="display-1">500</h1>
-    <h1 th:text="#{views.error.server}">Not found</h1>
-    <h1><a th:text="#{views.error.home}" th:href="@{/documents}">Back to home</a></h1>
-</div>
+<footer class="footer" th:fragment="footer">
+    <div class ="container">
+        <span class ="text-muted">&copy; Melashchenko, 2018</span>
+    </div>
+</footer>
 
 </body>
 </html>

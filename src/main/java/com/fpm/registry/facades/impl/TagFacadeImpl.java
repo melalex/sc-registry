@@ -8,6 +8,7 @@ import com.fpm.registry.services.TagService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 @Facade
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class TagFacadeImpl implements TagFacade {
     private ExtendedMapper extendedMapper;
 
     @Override
+    @Transactional
     public Page<TagDto> getByNameStartsWith(String name, Pageable pageable) {
         return tagService.getByNameStartsWith(name, pageable)
                 .map(extendedMapper.mapperFor(TagDto.class));

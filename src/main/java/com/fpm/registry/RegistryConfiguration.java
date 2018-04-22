@@ -4,17 +4,13 @@ import com.fpm.registry.services.strategy.NamingStrategy;
 import com.fpm.registry.services.strategy.impl.NormalizationDecorator;
 import com.fpm.registry.services.strategy.impl.TimestampNamingStrategy;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
 
 import java.time.Clock;
 
 @Configuration
 public class RegistryConfiguration {
-
-    private static final String MESSAGE_SOURCE_LOCATION = "classpath:i18n/messages";
 
     @Bean
     public TimestampNamingStrategy timestampNamingStrategy() {
@@ -34,12 +30,5 @@ public class RegistryConfiguration {
     @Bean
     public Clock clock() {
         return Clock.systemDefaultZone();
-    }
-
-    @Bean
-    public MessageSource messageSource() {
-        var messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename(MESSAGE_SOURCE_LOCATION);
-        return messageSource;
     }
 }

@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{views.document.list}">Documents</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+          crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/webjars/font-awesome/5.0.10/css/font-awesome.min.css}">
+
+    <link rel="stylesheet" href="../static/css/core.css" th:href="@{/css/core.css}"/>
+
 </head>
 <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Static header</a>
+        </div>
+    </div>
+</nav>
+
+<!--/*@thymesVar id="model" type="org.springframework.data.domain.Page"*/-->
+<div class="container margit-top" layout:fragment="content">
+    <div class="text-center">
+        <h1 class="title" th:text="#{views.document.list}">Documents</h1>
+        <hr/>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form th:action="@{/documents}" class="form-inline" method="get">
+                <label class="sr-only" for="name" th:text="#{views.document.name}">Name</label>
+                <input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name">
+
+                <button class="btn btn-primary search-button" th:text="#{views.action.search}">Search</button>
+            </form>
+        </div>
+        <div class="col-md-6"></div>
+
+        <div class="col-md-2">
+            <a class="btn btn-success search-button" th:href="@{/documents/create}" th:text="#{views.action.create}">
+                Create
+            </a>
+        </div>
+    </div>
+
+    <h1 class="text-center no-result-text" th:text="#{views.result.empty}" th:unless="${model.hasContent}">Nothing to
+        show</h1>
+
+    <table class="table table-hover" th:if="${model.hasContent}">
+        <thead>
+        <tr>
+            <th th:text="#{views.document.id}">Id</th>
+            <th th:text="#{views.document.name}">Name</th>
+            <th th:text="#{views.document.employee}">Employee</th>
+            <th th:text="#{views.document.date}">Date</th>
+        </tr>
+        </thead>
+        <tbody th:each="document : ${model.content}">
+        <!--/*@thymesVar id="document" type="com.fpm.registry.dto.DocumentDto"*/-->
+        <tr>
+            <td th:text="${document.id}">1</td>
+            <td>
+                <a th:href="@{/documents/{id}/edit(id = document.id)}" th:text="#{views.document.name}">Name</a>
+            </td>
+            <td th:text="${document.employee.fullName}">John Johnson</td>
+            <td th:text="${document.date}">04/22/2018</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <th:block th:replace="fragments/pager :: pager"/>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">&copy; Melashchenko, 2018</span>
+    </div>
+</footer>
 
 </body>
 </html>

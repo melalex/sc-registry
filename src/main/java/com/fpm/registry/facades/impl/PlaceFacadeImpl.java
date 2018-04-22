@@ -8,6 +8,7 @@ import com.fpm.registry.services.PlaceService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 @Facade
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class PlaceFacadeImpl implements PlaceFacade {
     private ExtendedMapper extendedMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public Page<PlaceDto> getByCountryIsoAndNameStartsWith(String iso, String name, Pageable pageable) {
         return placeService.getByCountryIsoAndNameStartsWith(iso, name, pageable)
                 .map(extendedMapper.mapperFor(PlaceDto.class));

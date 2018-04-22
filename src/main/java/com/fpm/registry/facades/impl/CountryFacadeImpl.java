@@ -8,6 +8,7 @@ import com.fpm.registry.services.CountryService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 @Facade
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class CountryFacadeImpl implements CountryFacade {
     private CountryService countryService;
 
     @Override
+    @Transactional(readOnly = true)
     public Page<CountryDto> getByNameStartsWith(String name, Pageable pageable) {
         return countryService.getByNameStartsWith(name, pageable)
                 .map(extendedMapper.mapperFor(CountryDto.class));
