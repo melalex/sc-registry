@@ -8,6 +8,7 @@ import com.fpm.registry.utils.Views;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,7 @@ public class DocumentViewController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView getByNameStarts(@RequestParam(required = false) String name, Pageable pageable) {
         var model = documentFacade.getByNameStarts(name, pageable);
         return Views.from(Views.DOCUMENT_LIST, model);
@@ -52,6 +54,6 @@ public class DocumentViewController {
     public ModelAndView commit(@PathVariable Long id) {
         documentFacade.commit(id);
 
-        return Views.redirectTo("/documents", of(COMMIT_DOCUMENT_MESSAGE));
+        return Views.redirectToIndex(of(COMMIT_DOCUMENT_MESSAGE));
     }
 }

@@ -10,7 +10,7 @@ public class Views {
 
     public static final String NOT_FOUND = "errors/notFound";
     public static final String INTERNAL_SERVER_ERROR = "errors/internalServerError";
-
+    
     public static final String DOCUMENT_LIST = "documentList";
     public static final String DOCUMENT_VIEW = "viewDocument";
     public static final String DOCUMENT_EDIT = "editDocument";
@@ -27,6 +27,14 @@ public class Views {
 
     public ModelAndView from(String view) {
         return new ModelAndView(view);
+    }
+
+    public ModelAndView redirectToIndex() {
+        return redirectToIndex(List.of());
+    }
+
+    public ModelAndView redirectToIndex(List<String> messages) {
+        return redirectTo(Urls.INDEX, messages);
     }
 
     public ModelAndView redirectTo(String view, List<String> messages) {

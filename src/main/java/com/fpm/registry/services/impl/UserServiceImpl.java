@@ -17,7 +17,23 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private static final String GET_BY_LOGIN_MESSAGE = "Fetching user by login";
+    private static final String GET_CURRENT_MESSAGE = "Fetching current user";
+    private static final String CREATE_USER_MESSAGE = "Creating new User with login [{}]";
+
     private UserRepository userRepository;
+
+    @Override
+    public User create(User user) {
+        log.info(CREATE_USER_MESSAGE, user.getLogin());
+
+        user.setId(null);
+
+        getByLogin(user.getLogin())
+                .ifPresent(Exceptions.userAlreadyExists());
+
+        return userRepository.save(user);
+    }
 
     @Override
     public User getCurrentUser() {
@@ -29,8 +45,16 @@ public class UserServiceImpl implements UserService {
         return getCurrentUserInternal().orElse(null);
     }
 
+    @Override
+    public Optional<User> getByLogin(String username) {
+        log.trace(GET_BY_LOGIN_MESSAGE);
+        return userRepository.findOneByLogin(username);
+    }
+
     private Optional<User> getCurrentUserInternal() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        log.trace(GET_CURRENT_MESSAGE);
 
         return Optional.ofNullable(authentication)
                 .map(Authentication::getName)

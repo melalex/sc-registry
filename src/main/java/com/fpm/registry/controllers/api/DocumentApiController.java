@@ -5,7 +5,7 @@ import com.fpm.registry.dto.DocumentDto;
 import com.fpm.registry.dto.MediaDto;
 import com.fpm.registry.facades.DocumentFacade;
 import com.fpm.registry.utils.MultipartFiles;
-import com.fpm.registry.wrapers.DocumentAttachmentWraper;
+import com.fpm.registry.wrapper.DocumentAttachmentWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,7 +42,7 @@ public class DocumentApiController {
 
     @PatchMapping("/{id}/media")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public MediaDto updateAttachment(@PathVariable Long id, @Valid DocumentAttachmentWraper attachment) {
+    public MediaDto updateAttachment(@PathVariable Long id, @Valid DocumentAttachmentWrapper attachment) {
         var file = attachment.getAttachment();
         var destination = documentFacade.updateAttachment(id, file.getOriginalFilename(), file.getContentType());
 

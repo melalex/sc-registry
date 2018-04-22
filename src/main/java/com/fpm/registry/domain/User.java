@@ -47,7 +47,7 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
-    private enum Role {
+    public enum Role {
         ROLE_ADMIN,
         ROLE_USER
     }
