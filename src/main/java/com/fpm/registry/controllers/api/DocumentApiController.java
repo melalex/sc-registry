@@ -8,6 +8,7 @@ import com.fpm.registry.utils.MultipartFiles;
 import com.fpm.registry.wrapper.DocumentAttachmentWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +27,13 @@ public class DocumentApiController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
+    @PreAuthorize("hasRole('ROLE_USER')")
     public DocumentDto create(@RequestBody @Valid DocumentDto document) {
         return documentFacade.create(document);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER')")
     public DocumentDto update(@RequestBody @Valid DocumentDto document) {
         return documentFacade.update(document);
     }

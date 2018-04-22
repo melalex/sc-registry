@@ -7,6 +7,7 @@ import com.fpm.registry.exceptions.UserAlreadyExistsException;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -14,7 +15,6 @@ import java.util.function.Supplier;
 public class Exceptions {
 
     private static final String ID_FIELD = "id";
-    private static final String NOT_FOUND_ERROR_MESSAGE = "Entity [%s] with %s [%s] not found";
     private static final String UNAUTHORIZED_ERROR_MESSAGE = "Action requires authorization";
     private static final String USER_NOT_FOUNT_ERROR_MESSAGE = "User with login [%s] not found";
     private static final String USER_ALREADY_EXISTS_ERROR_MESSAGE = "User with login [%s] already exists";
@@ -26,8 +26,7 @@ public class Exceptions {
     }
 
     public Supplier<ResourceNotFoundException> notFound(Class<?> entity, String field, Object id) {
-        var message = String.format(NOT_FOUND_ERROR_MESSAGE, entity.getSimpleName(), field, id);
-        return () -> new ResourceNotFoundException(message);
+        return () -> new ResourceNotFoundException(entity.getSimpleName(), field, Objects.toString(id));
     }
 
     public Supplier<UnauthorizedException> unauthorized() {
@@ -46,6 +45,10 @@ public class Exceptions {
     }
 
     public String getErrorCode(Throwable throwable) {
-        return String.format(ERROR_FORMAT, throwable.getClass().getSimpleName());
+        return getErrorCode(throwable.getClass());
+    }
+
+    public static String getErrorCode(Class<? extends Throwable> clazz) {
+        return String.format(ERROR_FORMAT, clazz.getSimpleName());
     }
 }

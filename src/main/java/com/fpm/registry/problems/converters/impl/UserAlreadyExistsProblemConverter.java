@@ -17,7 +17,7 @@ import java.util.Locale;
 @AllArgsConstructor
 public class UserAlreadyExistsProblemConverter extends AbstractProblemConverter<UserAlreadyExistsException> {
 
-    private static final String USER_ALREADY_EXISTS_ERROR_MESSAGE = "errors.user.login.alreadyExists";
+    private static final String ERROR_MESSAGE_CODE = "errors.user.login.alreadyExists";
     private static final String LOGIN_FIELD = "login";
 
     private Clock clock;
@@ -43,7 +43,7 @@ public class UserAlreadyExistsProblemConverter extends AbstractProblemConverter<
     private List<Problem.NestedError> getNestedErrors(UserAlreadyExistsException throwable, Locale locale) {
         var error = Problem.NestedError.builder()
                 .field(LOGIN_FIELD)
-                .message(i18nService.getMessage(USER_ALREADY_EXISTS_ERROR_MESSAGE, locale))
+                .message(i18nService.getMessage(ERROR_MESSAGE_CODE, locale))
                 .rejected(throwable.getRejected())
                 .build();
 
