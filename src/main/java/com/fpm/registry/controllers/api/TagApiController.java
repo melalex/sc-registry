@@ -17,7 +17,7 @@ public class TagApiController {
     private TagFacade tagFacade;
 
     @GetMapping
-    @Cacheable(Caches.TAGS_CACHE)
+    @Cacheable(Caches.TAGS)
     public Page<TagDto> getByNameStartsWith(String name, Pageable pageable) {
         return tagFacade.getByNameStartsWith(name, pageable);
     }

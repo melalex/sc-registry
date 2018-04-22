@@ -17,7 +17,7 @@ public class PlaceApiController {
     private PlaceFacade placeFacade;
 
     @GetMapping
-    @Cacheable(Caches.PLACES_CACHE)
+    @Cacheable(Caches.PLACES)
     public Page<PlaceDto> getByCountryIsoAndNameStartsWith(String iso, String name, Pageable pageable) {
         return placeFacade.getByCountryIsoAndNameStartsWith(iso, name, pageable);
     }

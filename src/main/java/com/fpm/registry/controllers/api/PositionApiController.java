@@ -17,7 +17,7 @@ public class PositionApiController {
     private PositionFacade positionFacade;
 
     @GetMapping
-    @Cacheable(Caches.POSITIONS_CACHE)
+    @Cacheable(Caches.POSITIONS)
     public Page<PositionDto> getAll(Pageable pageable) {
         return positionFacade.getAll(pageable);
     }

@@ -17,7 +17,7 @@ public class CountryApiController {
     private CountryFacade countryFacade;
 
     @GetMapping
-    @Cacheable(Caches.COUNTRIES_CACHE)
+    @Cacheable(Caches.COUNTRIES)
     public Page<CountryDto> getByNameStartsWith(String name, Pageable pageable) {
         return countryFacade.getByNameStartsWith(name, pageable);
     }
