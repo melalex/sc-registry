@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ViewControllerAdvice {
 
     private static final String HANDLED_NOT_FOUND_EXCEPTION = "Caught ResourceNotFoundException: {}";
-    private static final String HANDLED_UNEXPECTED_EXCEPTION = "Caught ResourceNotFoundException: {}";
+    private static final String HANDLED_UNEXPECTED_EXCEPTION = "Caught Throwable: {}";
 
     private static final String USER_ATTRIBUTE = "user";
 

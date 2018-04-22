@@ -1,4 +1,4 @@
-package com.fpm.registry.vo;
+package com.fpm.registry.problems;
 
 import lombok.Builder;
 import lombok.Value;
@@ -8,17 +8,18 @@ import java.util.List;
 
 @Value
 @Builder
-public class ProblemVo {
+public class Problem {
 
     private LocalDateTime timestamp;
     private String type;
     private int status;
     private String detail;
-    private List<NestedErrorVo> errors;
+    private String message;
+    private List<NestedError> errors;
 
     @Value
     @Builder
-    public static class NestedErrorVo {
+    public static class NestedError {
 
         private String field;
         private Object rejected;

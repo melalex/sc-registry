@@ -14,6 +14,8 @@ import java.time.Clock;
 @Configuration
 public class RegistryConfiguration {
 
+    private static final String MESSAGE_SOURCE_LOCATION = "classpath:i18n/messages";
+
     @Bean
     public TimestampNamingStrategy timestampNamingStrategy() {
         return new TimestampNamingStrategy(clock());
@@ -37,7 +39,7 @@ public class RegistryConfiguration {
     @Bean
     public MessageSource messageSource() {
         var messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("classpath:i18n/messages");
+        messageSource.setBasename(MESSAGE_SOURCE_LOCATION);
         return messageSource;
     }
 }

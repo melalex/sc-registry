@@ -19,6 +19,8 @@ public class Exceptions {
     private static final String USER_NOT_FOUNT_ERROR_MESSAGE = "User with login [%s] not found";
     private static final String USER_ALREADY_EXISTS_ERROR_MESSAGE = "User with login [%s] already exists";
 
+    private static final String ERROR_FORMAT = "error.%s.message";
+
     public Supplier<ResourceNotFoundException> notFound(Class<?> entity, Object id) {
         return notFound(entity, ID_FIELD, id);
     }
@@ -41,5 +43,9 @@ public class Exceptions {
             var login = u.getLogin();
             throw new UserAlreadyExistsException(login, String.format(USER_ALREADY_EXISTS_ERROR_MESSAGE, login));
         };
+    }
+
+    public String getErrorCode(Throwable throwable) {
+        return String.format(ERROR_FORMAT, throwable.getClass().getSimpleName());
     }
 }
