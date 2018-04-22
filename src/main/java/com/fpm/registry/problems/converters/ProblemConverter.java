@@ -6,5 +6,9 @@ import java.util.Locale;
 
 public interface ProblemConverter<T extends Throwable> {
 
+    boolean supports(Throwable throwable);
+
+    int order();
+
     Problem convert(T throwable, Locale locale);
 }

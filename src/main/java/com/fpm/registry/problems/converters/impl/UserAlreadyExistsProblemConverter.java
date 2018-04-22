@@ -2,7 +2,6 @@ package com.fpm.registry.problems.converters.impl;
 
 import com.fpm.registry.exceptions.UserAlreadyExistsException;
 import com.fpm.registry.problems.Problem;
-import com.fpm.registry.problems.converters.ProblemConverter;
 import com.fpm.registry.services.I18nService;
 import com.fpm.registry.utils.Exceptions;
 import lombok.AllArgsConstructor;
@@ -16,13 +15,18 @@ import java.util.Locale;
 
 @Component
 @AllArgsConstructor
-public class UserAlreadyExistsConverter implements ProblemConverter<UserAlreadyExistsException> {
+public class UserAlreadyExistsProblemConverter extends AbstractProblemConverter<UserAlreadyExistsException> {
 
     private static final String USER_ALREADY_EXISTS_ERROR_MESSAGE = "errors.user.login.alreadyExists";
     private static final String LOGIN_FIELD = "login";
 
     private Clock clock;
     private I18nService i18nService;
+
+    @Override
+    protected Class<UserAlreadyExistsException> getTarget() {
+        return UserAlreadyExistsException.class;
+    }
 
     @Override
     public Problem convert(UserAlreadyExistsException throwable, Locale locale) {
