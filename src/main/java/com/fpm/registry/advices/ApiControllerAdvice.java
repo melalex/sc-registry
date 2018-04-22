@@ -13,15 +13,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.validation.ConstraintViolationException;
-
 @Slf4j
 @AllArgsConstructor
 @ControllerAdvice(annotations = ApiController.class)
 public class ApiControllerAdvice {
 
     private static final String HANDLED_NOT_FOUND_EXCEPTION = "Caught ResourceNotFoundException: {}";
-    private static final String CAUGHT_CONSTRAINT_VIOLATION_EXCEPTION = "Caught ConstraintViolationException: {}";
     private static final String HANDLED_UNEXPECTED_EXCEPTION = "Caught Throwable: {}";
     private static final String HANDLED_UNAUTHORIZED_EXCEPTION = "Caught UnauthorizedException: {}";
 
@@ -32,15 +29,6 @@ public class ApiControllerAdvice {
     @ExceptionHandler(ResourceNotFoundException.class)
     public Problem handleNotFound(ResourceNotFoundException exception) {
         log.debug(HANDLED_NOT_FOUND_EXCEPTION, exception.getMessage());
-
-        return problemConversionService.toProblem(exception);
-    }
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ConstraintViolationException.class)
-    public Problem handleConstraintViolationException(ConstraintViolationException exception) {
-        log.debug(CAUGHT_CONSTRAINT_VIOLATION_EXCEPTION, exception.getMessage());
 
         return problemConversionService.toProblem(exception);
     }

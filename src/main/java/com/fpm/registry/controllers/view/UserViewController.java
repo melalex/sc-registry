@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 @Slf4j
@@ -25,7 +24,6 @@ import javax.validation.Valid;
 public class UserViewController {
 
     private static final String CAUGHT_USER_ALREADY_EXISTS_EXCEPTION = "Caught UserAlreadyExistsException: {}";
-    private static final String CAUGHT_CONSTRAINT_VIOLATION_EXCEPTION = "Caught ConstraintViolationException: {}";
 
     private UserFacade userFacade;
     private ProblemConversionService problemConversionService;
@@ -41,15 +39,6 @@ public class UserViewController {
     @ExceptionHandler(UserAlreadyExistsException.class)
     public Problem handleUserAlreadyExistsException(UserAlreadyExistsException exception) {
         log.debug(CAUGHT_USER_ALREADY_EXISTS_EXCEPTION, exception.getMessage());
-
-        return problemConversionService.toProblem(exception);
-    }
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ConstraintViolationException.class)
-    public Problem handleConstraintViolationException(ConstraintViolationException exception) {
-        log.debug(CAUGHT_CONSTRAINT_VIOLATION_EXCEPTION, exception.getMessage());
 
         return problemConversionService.toProblem(exception);
     }
