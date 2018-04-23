@@ -1,4 +1,4 @@
-package com.fpm.registry.dto;
+package com.fpm.registry.forms;
 
 import com.fpm.registry.constraints.FieldMatch;
 import com.fpm.registry.constraints.HardPassword;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @FieldMatch(first = "password", second = "repeatPassword")
-public class SignUpDto {
+public class SignUpForm {
 
     @Size(min = 3, max = 40)
     private String login;

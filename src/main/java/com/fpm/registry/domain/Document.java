@@ -64,8 +64,11 @@ public class Document {
 
     @CreatedBy
     @Column(updatable = false)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "document")
     private User employee;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "document")
+    private Place place;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "document", cascade = CascadeType.ALL)
     private Media attachment;

@@ -1,7 +1,7 @@
 package com.fpm.registry.controllers.view;
 
 import com.fpm.registry.annotations.ViewController;
-import com.fpm.registry.dto.SignUpDto;
+import com.fpm.registry.forms.SignUpForm;
 import com.fpm.registry.exceptions.UserAlreadyExistsException;
 import com.fpm.registry.facades.UserFacade;
 import com.fpm.registry.problems.Problem;
@@ -29,7 +29,7 @@ public class UserViewController {
     private ProblemConversionService problemConversionService;
 
     @PostMapping
-    public ModelAndView create(@Valid SignUpDto dto) {
+    public ModelAndView create(@Valid SignUpForm dto) {
         userFacade.create(dto);
         return Views.redirectToIndex();
     }

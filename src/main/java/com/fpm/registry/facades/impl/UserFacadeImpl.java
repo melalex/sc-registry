@@ -2,7 +2,7 @@ package com.fpm.registry.facades.impl;
 
 import com.fpm.registry.annotations.Facade;
 import com.fpm.registry.domain.User;
-import com.fpm.registry.dto.SignUpDto;
+import com.fpm.registry.forms.SignUpForm;
 import com.fpm.registry.dto.UserDto;
 import com.fpm.registry.extensions.ExtendedMapper;
 import com.fpm.registry.facades.UserFacade;
@@ -19,7 +19,7 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     @Transactional
-    public UserDto create(SignUpDto dto) {
+    public UserDto create(SignUpForm dto) {
         var toSave = extendedMapper.map(dto, User.class);
         var saved = userService.create(toSave);
         return extendedMapper.map(saved, UserDto.class);
