@@ -1,10 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{views.document}">Document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+          crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/webjars/font-awesome/5.0.10/css/font-awesome.min.css}">
+
+    <link rel="stylesheet" href="../static/css/core.css" th:href="@{/css/core.css}"/>
+
 </head>
 <body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Static header</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container margin-top" layout:fragment="content">
+    <div class="text-center">
+        <h1 class="title" th:text="#{views.forms.signIn}">Sign in</h1>
+        <hr/>
+    </div>
+
+    <div class="row main">
+        <div class="main-login main-center">
+            <form th:action="@{/signIn}" accept-charset="UTF-8" method="post">
+
+                <div class="form-group">
+                    <label for="login" th:text="#{views.user.username}">
+                        Username
+                    </label>
+                    <div>
+                        <div class="input-group">
+                            <input class="form-control" name="login" id="login"
+                                   th:placeholder="#{views.user.username}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" th:text="#{views.user.password}">
+                        Password
+                    </label>
+                    <div>
+                        <div class="input-group">
+                            <input type="password"
+                                   class="form-control"
+                                   name="password"
+                                   id="password"
+                                   th:placeholder="#{views.user.password}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <input class="btn btn-primary btn-lg btn-block login-button" type="submit"
+                       th:value="#{views.forms.signIn}">
+            </form>
+
+            <a href="#" class="margin-top" th:href="@{/signUp}" th:text="#{views.forms.signUp}">
+                SignUp
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">&copy; Melashchenko, 2018</span>
+    </div>
+</footer>
 
 </body>
 </html>

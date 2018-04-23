@@ -19,12 +19,12 @@
 </head>
 <body>
 
-<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse" th:fragment="header">
-    <a class="navbar-brand" th:href="@{/documents}" th:text="#{views.navbar.title}">Documents registry</a>
+<nav class="navbar navbar-dark bg-dark" th:fragment="header">
+    <a class="navbar-brand" href="#" th:href="@{/documents}" th:text="#{views.navbar.title}">Documents registry</a>
 
-    <ul>
+    <ul class="navbar-nav mr-sm-2">
         <li class="nav-item">
-            <a class="nav-link" th:href="#{/logout}" th:text="#{views.action.logout}">
+            <a class="nav-link" href="#" th:href="#{/logout}" th:text="#{views.action.logout}">
                 Logout
             </a>
         </li>

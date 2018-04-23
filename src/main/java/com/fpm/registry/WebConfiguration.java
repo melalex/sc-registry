@@ -43,7 +43,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController(Urls.LOGIN).setViewName(Views.SIGN_IN);
         registry.addViewController(Urls.REGISTER).setViewName(Views.SIGN_UP);
-        registry.addViewController(Urls.CREATE_DOCUMENT).setViewName(Views.DOCUMENT_CREATE);
+        registry.addViewController(Urls.CREATE_DOCUMENT).setViewName(Views.DOCUMENT_EDIT);
     }
 
     @Override

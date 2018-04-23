@@ -5,6 +5,7 @@ import static java.util.List.of;
 import com.fpm.registry.annotations.ViewController;
 import com.fpm.registry.dto.DocumentDto;
 import com.fpm.registry.facades.DocumentFacade;
+import com.fpm.registry.services.I18nService;
 import com.fpm.registry.utils.Caches;
 import com.fpm.registry.utils.Views;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Locale;
 import javax.validation.Valid;
 
 @AllArgsConstructor
@@ -32,6 +34,7 @@ public class DocumentViewController {
     private static final String UPDATE_DOCUMENT_MESSAGE = "messages.Document.updated";
 
     private DocumentFacade documentFacade;
+    private I18nService i18nService;
 
     @GetMapping("/{id}")
     @Cacheable(value = Caches.SINGLE_DOCUMENT, key = "id")
@@ -65,17 +68,17 @@ public class DocumentViewController {
     @PutMapping
     @PreAuthorize("hasRole('ROLE_USER')")
     @CacheEvict(value = Caches.SINGLE_DOCUMENT, key = "document.id")
-    public ModelAndView update(@RequestBody @Valid DocumentDto document) {
+    public ModelAndView update(@RequestBody @Valid DocumentDto document, Locale locale) {
         documentFacade.update(document);
-        return Views.redirectToIndex(of(UPDATE_DOCUMENT_MESSAGE));
+        return Views.redirectToIndex(of(i18nService.getMessage(UPDATE_DOCUMENT_MESSAGE, locale)));
     }
 
     @PatchMapping("/{id}/commit")
     @ResponseStatus(HttpStatus.CREATED)
     @CacheEvict({Caches.ALL_DOCUMENTS, Caches.USER_DOCUMENTS})
-    public ModelAndView commit(@PathVariable Long id) {
+    public ModelAndView commit(@PathVariable Long id, Locale locale) {
         documentFacade.commit(id);
 
-        return Views.redirectToIndex(of(COMMIT_DOCUMENT_MESSAGE));
+        return Views.redirectToIndex(of(i18nService.getMessage(COMMIT_DOCUMENT_MESSAGE, locale)));
     }
 }

@@ -5,6 +5,7 @@ import com.fpm.registry.domain.Document;
 import com.fpm.registry.dto.DocumentDto;
 import com.fpm.registry.extensions.ExtendedMapper;
 import com.fpm.registry.facades.DocumentFacade;
+import com.fpm.registry.forms.DocumentForm;
 import com.fpm.registry.services.DocumentService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,8 +23,11 @@ public class DocumentFacadeImpl implements DocumentFacade {
 
     @Override
     @Transactional
-    public DocumentDto create(DocumentDto document) {
-        return extendedMapper.wrapEntity(document, Document.class, documentService::create);
+    public DocumentDto create(DocumentForm document) {
+        var toSave = extendedMapper.map(document, Document.class);
+        var saved = documentService.create(toSave);
+
+        return extendedMapper.map(saved, DocumentDto.class);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.fpm.registry.annotations.ApiController;
 import com.fpm.registry.dto.DocumentDto;
 import com.fpm.registry.dto.MediaDto;
 import com.fpm.registry.facades.DocumentFacade;
+import com.fpm.registry.forms.DocumentForm;
 import com.fpm.registry.utils.Caches;
 import com.fpm.registry.utils.MultipartFiles;
 import com.fpm.registry.wrapper.DocumentAttachmentWrapper;
@@ -30,7 +31,7 @@ public class DocumentApiController {
     @CacheEvict(Caches.TAGS)
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public DocumentDto create(@RequestBody @Valid DocumentDto document) {
+    public DocumentDto create(@RequestBody @Valid DocumentForm document) {
         return documentFacade.create(document);
     }
 

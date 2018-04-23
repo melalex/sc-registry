@@ -1,6 +1,7 @@
 package com.fpm.registry.facades;
 
 import com.fpm.registry.dto.DocumentDto;
+import com.fpm.registry.forms.DocumentForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -8,7 +9,7 @@ import java.io.File;
 
 public interface DocumentFacade {
 
-    DocumentDto create(DocumentDto document);
+    DocumentDto create(DocumentForm document);
 
     void commit(Long id);
 

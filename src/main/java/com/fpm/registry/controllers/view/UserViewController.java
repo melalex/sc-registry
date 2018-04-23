@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @AllArgsConstructor
-@ViewController("/user")
+@ViewController("/users")
 public class UserViewController {
 
     private static final String CAUGHT_USER_ALREADY_EXISTS_EXCEPTION = "Caught UserAlreadyExistsException: {}";

@@ -12,7 +12,7 @@ public class DocumentDto {
     private String name;
     private String description;
     private Set<String> tags;
-    private PlaceDto placeDto;
+    private PlaceDto place;
     private LocalDate date;
     private UserDto employee;
     private MediaDto attachment;

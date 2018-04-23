@@ -22,7 +22,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-dark bg-dark">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Static header</a>
@@ -31,7 +31,7 @@
 </nav>
 
 <!--/*@thymesVar id="model" type="org.springframework.data.domain.Page"*/-->
-<div class="container margit-top" layout:fragment="content">
+<div class="container margin-top" layout:fragment="content">
     <div class="text-center">
         <h1 class="title" th:text="#{views.document.list}">Documents</h1>
         <hr/>
@@ -49,14 +49,15 @@
         <div class="col-md-6"></div>
 
         <div class="col-md-2">
-            <a class="btn btn-success search-button" th:href="@{/documents/create}" th:text="#{views.action.create}">
+            <a class="btn btn-success search-button" href="#" th:href="@{/documents/create}" th:text="#{views.action.create}">
                 Create
             </a>
         </div>
     </div>
 
-    <h1 class="text-center no-result-text" th:text="#{views.result.empty}" th:unless="${model.hasContent}">Nothing to
-        show</h1>
+    <h1 class="text-center no-result-text" th:text="#{views.result.empty}" th:unless="${model.hasContent}">
+        Nothing to show
+    </h1>
 
     <table class="table table-hover" th:if="${model.hasContent}">
         <thead>
@@ -72,7 +73,7 @@
         <tr>
             <td th:text="${document.id}">1</td>
             <td>
-                <a th:href="@{/documents/{id}/edit(id = document.id)}" th:text="#{views.document.name}">Name</a>
+                <a th:href="@{/documents/{id}(id = document.id)}" th:text="#{views.document.name}">Name</a>
             </td>
             <td th:text="${document.employee.fullName}">John Johnson</td>
             <td th:text="${document.date}">04/22/2018</td>
