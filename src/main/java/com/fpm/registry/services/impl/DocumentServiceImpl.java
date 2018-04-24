@@ -1,6 +1,6 @@
 package com.fpm.registry.services.impl;
 
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
 import com.fpm.registry.domain.Document;
 import com.fpm.registry.domain.User;
@@ -28,8 +28,7 @@ public class DocumentServiceImpl implements DocumentService {
     private static final String NEW_DOCUMENT_MESSAGE = "Created new Document: {}";
     private static final String COMMIT_DOCUMENT_MESSAGE = "Committing Document with id [{}]";
     private static final String UPDATE_DOCUMENT_MESSAGE = "Updated Document: {}";
-    private static final String GET_BY_USER_AND_NAME_MESSAGE = "Searching Documents by employee [{}] and name [{}]";
-    private static final String GET_BY_NAME_MESSAGE = "Searching Documents by name [{}]";
+    private static final String GET_BY_USER_AND_NAME_MESSAGE = "Searching Documents for employee [{}] by name [{}]";
     private static final String NAME_FIELD = "name";
 
     private DocumentRepository documentRepository;
@@ -97,36 +96,21 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public Page<Document> getByNameStarts(String name, Pageable pageable) {
-        log.trace(GET_BY_NAME_MESSAGE, name);
+    public Page<Document> getByNameContains(String name, Pageable pageable) {
+        var example = new Document();
+        var user = userService.getCurrentUser();
 
-        return documentRepository.findAll(getDocumentExample(name), pageable);
-    }
-
-    @Override
-    public Page<Document> getByNameStartsForCurrentUser(String name, Pageable pageable) {
-        return getByUserAndNameStartsWith(userService.getCurrentUser(), name, pageable);
-    }
-
-    @Override
-    public Page<Document> getByUserAndNameStartsWith(User user, String name, Pageable pageable) {
         log.trace(GET_BY_USER_AND_NAME_MESSAGE, user.getLogin(), name);
 
-        return documentRepository.findAll(getDocumentExample(user, name), pageable);
-    }
+        example.setName(name);
 
-    private Example<Document> getDocumentExample(String name) {
-        return getDocumentExample(null, name);
-    }
-
-    private Example<Document> getDocumentExample(User user, String name) {
-        var document = new Document();
-        document.setEmployee(user);
-        document.setName(name);
+        if (!user.getRoles().contains(User.Role.ROLE_ADMIN)) {
+            example.setEmployee(user);
+        }
 
         var matcher = ExampleMatcher.matching()
-                .withMatcher(NAME_FIELD, startsWith());
+                .withMatcher(NAME_FIELD, contains());
 
-        return Example.of(document, matcher);
+        return documentRepository.findAll(Example.of(example, matcher), pageable);
     }
 }

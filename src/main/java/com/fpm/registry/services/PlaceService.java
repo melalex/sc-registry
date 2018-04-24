@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface PlaceService {
 
-    Page<Place> getByCountryIsoAndNameStartsWith(String iso, String name, Pageable pageable);
+    Page<Place> getByNameContains(String name, Pageable pageable);
 
-    Place getById(Long id);
+    Place getByCanonicalName(String name);
 }

@@ -63,15 +63,9 @@ public class DocumentFacadeImpl implements DocumentFacade {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<DocumentDto> getByNameStarts(String name, Pageable pageable) {
-        return documentService.getByNameStarts(name, pageable)
+    public Page<DocumentDto> getByNameContains(String name, Pageable pageable) {
+        return documentService.getByNameContains(name, pageable)
                 .map(extendedMapper.mapperFor(DocumentDto.class));
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Page<DocumentDto> getByNameStartsForCurrentUser(String name, Pageable pageable) {
-        return documentService.getByNameStartsForCurrentUser(name, pageable)
-                .map(extendedMapper.mapperFor(DocumentDto.class));
-    }
 }

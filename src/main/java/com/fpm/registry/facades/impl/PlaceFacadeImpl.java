@@ -19,8 +19,8 @@ public class PlaceFacadeImpl implements PlaceFacade {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<PlaceDto> getByCountryIsoAndNameStartsWith(String iso, String name, Pageable pageable) {
-        return placeService.getByCountryIsoAndNameStartsWith(iso, name, pageable)
+    public Page<PlaceDto> getByNameContains(String name, Pageable pageable) {
+        return placeService.getByNameContains(name, pageable)
                 .map(extendedMapper.mapperFor(PlaceDto.class));
     }
 }

@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class PlaceReverseConverter extends ConverterConfigurerSupport<Long, Place> {
+public class PlaceReverseConverter extends ConverterConfigurerSupport<String, Place> {
 
     private PlaceService placeService;
 
     @Override
-    protected Converter<Long, Place> converter() {
+    protected Converter<String, Place> converter() {
         return new AbstractConverter<>() {
 
             @Override
-            protected Place convert(Long source) {
-                return placeService.getById(source);
+            protected Place convert(String source) {
+                return placeService.getByCanonicalName(source);
             }
         };
     }

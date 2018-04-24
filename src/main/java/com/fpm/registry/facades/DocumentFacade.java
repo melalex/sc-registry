@@ -21,7 +21,5 @@ public interface DocumentFacade {
 
     DocumentDto getById(Long id);
 
-    Page<DocumentDto> getByNameStarts(String name, Pageable pageable);
-
-    Page<DocumentDto> getByNameStartsForCurrentUser(String name, Pageable pageable);
+    Page<DocumentDto> getByNameContains(String name, Pageable pageable);
 }

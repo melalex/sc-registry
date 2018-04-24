@@ -51,17 +51,8 @@ public class DocumentViewController {
     }
 
     @GetMapping("/all")
-    @Cacheable(Caches.ALL_DOCUMENTS)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ModelAndView getByNameStarts(@RequestParam(required = false) String name, Pageable pageable) {
-        var model = documentFacade.getByNameStarts(name, pageable);
-        return Views.from(Views.DOCUMENT_LIST, model);
-    }
-
-    @GetMapping
-    @Cacheable(Caches.USER_DOCUMENTS)
-    public ModelAndView getByNameStartsForCurrentUser(@RequestParam(required = false) String name, Pageable pageable) {
-        var model = documentFacade.getByNameStartsForCurrentUser(name, pageable);
+    public ModelAndView getByNameContains(@RequestParam(required = false) String name, Pageable pageable) {
+        var model = documentFacade.getByNameContains(name, pageable);
         return Views.from(Views.DOCUMENT_LIST, model);
     }
 
@@ -75,7 +66,7 @@ public class DocumentViewController {
 
     @PatchMapping("/{id}/commit")
     @ResponseStatus(HttpStatus.CREATED)
-    @CacheEvict({Caches.ALL_DOCUMENTS, Caches.USER_DOCUMENTS})
+    @CacheEvict(value = Caches.SINGLE_DOCUMENT, key = "id")
     public ModelAndView commit(@PathVariable Long id, Locale locale) {
         documentFacade.commit(id);
 

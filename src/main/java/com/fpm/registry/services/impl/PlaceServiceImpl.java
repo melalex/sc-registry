@@ -15,21 +15,21 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class PlaceServiceImpl implements PlaceService {
 
-    private static final String FIND_BY_COUNTRY_AND_NAME_MESSAGE = "Fetching places by country [{}] and name [{}]";
-    private static final String FIND_BY_ID_MESSAGE = "Fetching places by id [{}]";
+    private static final String FIND_BY_COUNTRY_AND_NAME_MESSAGE = "Fetching places by name [{}]";
+    private static final String FIND_BY_ID_MESSAGE = "Fetching places by canonicalName [{}]";
 
     private PlaceRepository placeRepository;
 
     @Override
-    public Page<Place> getByCountryIsoAndNameStartsWith(String iso, String name, Pageable pageable) {
-        log.trace(FIND_BY_COUNTRY_AND_NAME_MESSAGE, iso, name);
-        return placeRepository.findAllByCountryIsoAndNameStartingWith(iso, name, pageable);
+    public Page<Place> getByNameContains(String name, Pageable pageable) {
+        log.trace(FIND_BY_COUNTRY_AND_NAME_MESSAGE, name);
+        return placeRepository.findAllByCanonicalNameContains(name, pageable);
     }
 
     @Override
-    public Place getById(Long id) {
-        log.trace(FIND_BY_ID_MESSAGE, id);
-        return placeRepository.findById(id)
-                .orElseThrow(Exceptions.notFound(Place.class, id));
+    public Place getByCanonicalName(String name) {
+        log.trace(FIND_BY_ID_MESSAGE, name);
+        return placeRepository.findByCanonicalName(name)
+                .orElseThrow(Exceptions.notFound(Place.class, name));
     }
 }

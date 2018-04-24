@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Header</title>
@@ -22,7 +24,7 @@
 <nav class="navbar navbar-dark bg-dark" th:fragment="header">
     <a class="navbar-brand" href="#" th:href="@{/documents}" th:text="#{views.navbar.title}">Documents registry</a>
 
-    <ul class="navbar-nav mr-sm-2">
+    <ul class="navbar-nav mr-sm-2" sec:authorize="isAuthenticated()">
         <li class="nav-item">
             <a class="nav-link" href="#" th:href="#{/logout}" th:text="#{views.action.logout}">
                 Logout

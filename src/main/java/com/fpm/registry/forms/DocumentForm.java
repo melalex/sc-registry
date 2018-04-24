@@ -26,5 +26,5 @@ public class DocumentForm {
     private Set<String> tags;
 
     @NonNull
-    private Long place;
+    private String place;
 }
