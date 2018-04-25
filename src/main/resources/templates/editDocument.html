@@ -62,7 +62,7 @@
             </label>
             <input class="form-control" name="tags" id="tags"
                    th:placeholder="#{views.document.tags}"
-                   th:value="${model.tags}">
+                   th:value="${#strings.listJoin(model.tags, ' ')}">
         </div>
 
         <div class="form-group">
@@ -78,7 +78,7 @@
             <label for="attachment" th:text="#{views.document.attachment}">
                 Attachment
             </label>
-            <input type="file" class="form-control" name="attachment" id="attachment"
+            <input type="file" accept="application/pdf" class="form-control" name="attachment" id="attachment"
                    th:placeholder="#{views.document.attachment}"
                    th:value="${model.tags}">
         </div>

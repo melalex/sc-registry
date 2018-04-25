@@ -29,6 +29,7 @@ public class DocumentServiceImpl implements DocumentService {
     private static final String COMMIT_DOCUMENT_MESSAGE = "Committing Document with id [{}]";
     private static final String UPDATE_DOCUMENT_MESSAGE = "Updated Document: {}";
     private static final String GET_BY_USER_AND_NAME_MESSAGE = "Searching Documents for employee [{}] by name [{}]";
+    private static final String ALREADY_ACTIVE_MESSAGE = "Document with id [{}] already active";
     private static final String NAME_FIELD = "name";
 
     private DocumentRepository documentRepository;
@@ -53,7 +54,14 @@ public class DocumentServiceImpl implements DocumentService {
         log.info(COMMIT_DOCUMENT_MESSAGE, id);
 
         var document = getById(id);
-        document.setStatus(Document.Status.ACTIVE);
+        var activeStatus = Document.Status.ACTIVE;
+
+        if (activeStatus.equals(document.getStatus())) {
+            log.info(ALREADY_ACTIVE_MESSAGE, id);
+            return document;
+        }
+
+        document.setStatus(activeStatus);
 
         return documentRepository.save(document);
     }

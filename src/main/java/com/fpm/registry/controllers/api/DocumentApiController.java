@@ -35,6 +35,13 @@ public class DocumentApiController {
         return documentFacade.create(document);
     }
 
+    @PatchMapping
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @CacheEvict(value = Caches.SINGLE_DOCUMENT, key = "document.id")
+    public DocumentDto update(@RequestBody @Valid DocumentDto document) {
+        return documentFacade.update(document);
+    }
+
     @DeleteMapping
     public void rollback(Long id) {
         documentFacade.rollback(id);
