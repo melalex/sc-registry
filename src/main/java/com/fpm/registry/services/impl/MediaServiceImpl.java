@@ -6,7 +6,7 @@ import com.fpm.registry.services.ConfigurationService;
 import com.fpm.registry.services.MediaService;
 import com.fpm.registry.services.strategy.NamingStrategy;
 import com.fpm.registry.utils.Exceptions;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MediaServiceImpl implements MediaService {
 
     private static final String INIT_MESSAGE =
@@ -28,8 +29,13 @@ public class MediaServiceImpl implements MediaService {
     private static final String DELETE_MESSAGE = "Deleting media [[{}]. Moved from [{}] to [{}]";
     private static final String NEW_MEDIA_MESSAGE = "Created new Media: {}";
 
+    @NotNull
     private MediaRepository mediaRepository;
+
+    @NotNull
     private NamingStrategy namingStrategy;
+
+    @NotNull
     private ConfigurationService configurationService;
 
     private Path fileStorage;
