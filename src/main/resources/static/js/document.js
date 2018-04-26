@@ -1,19 +1,17 @@
-function DocumentCommand(parameters) {
+function DocumentCommand(id) {
 
-    var {createDocumentUrl, updateDocument, updateMediaUrl, commitUrl, id} = parameters;
-
-    var that = this;
+    const that = this;
 
     this.documentId = id;
 
-    var createMedia = function () {
-        var formData = new FormData();
+    const createMedia = function () {
+        const formData = new FormData();
 
         formData.append('id', that.documentId);
         formData.append('attachment', $('#attachment').get(0).files.get(0));
 
         $.ajax({
-                   url: updateMediaUrl,
+                   url: `/api/v1/documents/${that.documentId}/media`,
                    type: 'patch',
                    data: formData,
                    cache: false,
@@ -22,9 +20,9 @@ function DocumentCommand(parameters) {
                })
     };
 
-    var commit = function () {
+    const commit = function () {
         $.ajax({
-                   url: commitUrl,
+                   url: `/${that.documentId}/commit`,
                    type: 'patch',
                    cache: false,
                    success: function (data, status, request) {
@@ -34,9 +32,9 @@ function DocumentCommand(parameters) {
                })
     };
 
-    var createDocument = function () {
+    const createDocument = function () {
         $.ajax({
-                   url: createDocumentUrl,
+                   url: '/api/v1/documents',
                    type: 'post',
                    cache: false,
                    data: {
@@ -53,9 +51,9 @@ function DocumentCommand(parameters) {
                })
     };
 
-    var editDocument = function () {
+    const editDocument = function () {
         $.ajax({
-                   url: updateDocument,
+                   url: '/api/v1/documents',
                    cache: false,
                    type: 'patch',
                    data: {

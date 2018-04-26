@@ -1,5 +1,6 @@
 package com.fpm.registry;
 
+import com.fpm.registry.utils.Urls;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,11 +24,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/signIn")
+                .loginPage(Urls.LOGIN)
+                .defaultSuccessUrl(Urls.INDEX)
+                .failureForwardUrl(Urls.LOGIN_FAIL)
                 .permitAll()
                 .and()
             .logout()
-                .permitAll();
+                .permitAll()
+                .logoutSuccessUrl(Urls.INDEX);
 //        @formatter:on
     }
 

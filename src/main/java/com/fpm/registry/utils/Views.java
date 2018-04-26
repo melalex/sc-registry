@@ -19,6 +19,7 @@ public class Views {
 
     private static final String MODEL_ATTRIBUTE = "model";
     private static final String MESSAGES_ATTRIBUTE = "messages";
+    private static final String ERRORS_ATTRIBUTE = "errors";
     private static final String REDIRECT_FORMAT = "redirect:%s";
 
     public ModelAndView from(String view, Object model) {
@@ -39,5 +40,9 @@ public class Views {
 
     public ModelAndView redirectTo(String view, List<String> messages) {
         return new ModelAndView(String.format(REDIRECT_FORMAT, view), MESSAGES_ATTRIBUTE, messages);
+    }
+
+    public ModelAndView redirectWithErrors(String view, List<String> errors) {
+        return new ModelAndView(String.format(REDIRECT_FORMAT, view), ERRORS_ATTRIBUTE, errors);
     }
 }

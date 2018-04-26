@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.validation.Valid;
 
 @AllArgsConstructor
-@ApiController("/api/v1")
+@ApiController("/api/v1/documents")
 public class DocumentApiController {
 
     private DocumentFacade documentFacade;

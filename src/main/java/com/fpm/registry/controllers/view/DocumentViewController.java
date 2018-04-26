@@ -25,8 +25,7 @@ import java.util.Locale;
 @ViewController("/documents")
 public class DocumentViewController {
 
-    private static final String COMMIT_DOCUMENT_MESSAGE = "messages.Document.created";
-    private static final String UPDATE_DOCUMENT_MESSAGE = "messages.Document.updated";
+    private static final String COMMIT_DOCUMENT_MESSAGE = "messages.document.created";
 
     private DocumentFacade documentFacade;
     private I18nService i18nService;

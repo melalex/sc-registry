@@ -34,7 +34,7 @@
 <div class="container margin-top" layout:fragment="content">
     <h1 class="title" th:text="#{views.document}">Document</h1>
 
-    <form action="${pageContext.request.contextPath}/site/duty" accept-charset="UTF-8" method="post">
+    <form id="documentForm" action="#" accept-charset="UTF-8" method="post">
 
         <div class="form-group">
             <label for="name" th:text="#{views.document.name}">
@@ -87,6 +87,22 @@
                th:value="#{views.action.save}" value="Save">
     </form>
 
+    <script src="../static/js/document.js" th:src="@{/static/js/document.js}"></script>
+
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+
+        const documentCommand = new DocumentCommand(/*[[${model.id}]]*/ 42);
+
+        /*]]>*/
+
+        $("#documentForm").submit(function (event) {
+            event.preventDefault();
+            documentCommand.perform()
+        });
+    </script>
+
 </div>
 
 <footer class="footer">
@@ -94,6 +110,7 @@
         <span class="text-muted">&copy; Melashchenko, 2018</span>
     </div>
 </footer>
+
 
 </body>
 </html>
