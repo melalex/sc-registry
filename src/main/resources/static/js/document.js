@@ -73,7 +73,7 @@ function DocumentCommand(id) {
     };
 
     this.perform = function () {
-        if (id) {
+        if (that.documentId) {
             editDocument()
         } else {
             createDocument()
