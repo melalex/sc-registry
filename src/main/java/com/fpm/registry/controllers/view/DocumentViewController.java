@@ -3,6 +3,7 @@ package com.fpm.registry.controllers.view;
 import static java.util.List.of;
 
 import com.fpm.registry.annotations.ViewController;
+import com.fpm.registry.dto.DocumentDto;
 import com.fpm.registry.facades.DocumentFacade;
 import com.fpm.registry.services.I18nService;
 import com.fpm.registry.utils.Caches;
@@ -10,6 +11,7 @@ import com.fpm.registry.utils.Views;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,20 +35,20 @@ public class DocumentViewController {
     @GetMapping("/{id}")
     @Cacheable(value = Caches.SINGLE_DOCUMENT, key = "id")
     public ModelAndView getById(@PathVariable Long id) {
-        var model = documentFacade.getById(id);
+        DocumentDto model = documentFacade.getById(id);
         return Views.from(Views.DOCUMENT_VIEW, model);
     }
 
     @GetMapping("/{id}/edit")
     @Cacheable(value = Caches.SINGLE_DOCUMENT, key = "id")
     public ModelAndView getByIdForEditing(@PathVariable Long id) {
-        var model = documentFacade.getById(id);
+        DocumentDto model = documentFacade.getById(id);
         return Views.from(Views.DOCUMENT_EDIT, model);
     }
 
     @GetMapping("/all")
     public ModelAndView getByNameContains(@RequestParam(required = false) String name, Pageable pageable) {
-        var model = documentFacade.getByNameContains(name, pageable);
+        Page<DocumentDto> model = documentFacade.getByNameContains(name, pageable);
         return Views.from(Views.DOCUMENT_LIST, model);
     }
 

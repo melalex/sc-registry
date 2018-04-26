@@ -13,6 +13,6 @@ public class Tags {
     public Set<String> getNames(Collection<Tag> tags) {
         return tags.stream()
                 .map(Tag::getName)
-                .collect(Collectors.toUnmodifiableSet());
+                .collect(Collectors.toSet());
     }
 }

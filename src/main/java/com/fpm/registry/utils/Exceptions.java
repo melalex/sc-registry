@@ -39,7 +39,7 @@ public class Exceptions {
 
     public Consumer<User> userAlreadyExists() {
         return u -> {
-            var login = u.getLogin();
+            String login = u.getLogin();
             throw new UserAlreadyExistsException(login, String.format(USER_ALREADY_EXISTS_ERROR_MESSAGE, login));
         };
     }
@@ -48,7 +48,11 @@ public class Exceptions {
         return getErrorCode(throwable.getClass());
     }
 
-    public static String getErrorCode(Class<? extends Throwable> clazz) {
+    public String getErrorCode(Class<? extends Throwable> clazz) {
         return String.format(ERROR_FORMAT, clazz.getSimpleName());
+    }
+
+    public Supplier<IllegalStateException> illegalState(String message) {
+        return () -> new IllegalStateException(message);
     }
 }

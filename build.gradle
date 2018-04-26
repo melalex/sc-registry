@@ -18,7 +18,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'com.fpm'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_1_10
+sourceCompatibility = JavaVersion.VERSION_1_9
 
 repositories {
     mavenCentral()

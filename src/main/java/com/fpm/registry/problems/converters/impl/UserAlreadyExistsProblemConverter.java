@@ -41,7 +41,7 @@ public class UserAlreadyExistsProblemConverter extends AbstractProblemConverter<
     }
 
     private List<Problem.NestedError> getNestedErrors(UserAlreadyExistsException throwable, Locale locale) {
-        var error = Problem.NestedError.builder()
+        Problem.NestedError error = Problem.NestedError.builder()
                 .field(LOGIN_FIELD)
                 .message(i18nService.getMessage(ERROR_MESSAGE_CODE, locale))
                 .rejected(throwable.getRejected())

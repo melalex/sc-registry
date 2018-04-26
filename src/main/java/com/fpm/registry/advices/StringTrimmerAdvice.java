@@ -10,7 +10,7 @@ public class StringTrimmerAdvice {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        var trimmer = new StringTrimmerEditor(true);
+        StringTrimmerEditor trimmer = new StringTrimmerEditor(true);
         binder.registerCustomEditor(String.class, trimmer);
     }
 }

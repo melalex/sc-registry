@@ -25,13 +25,13 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Set<Tag> getByNames(Set<String> names) {
-        var persistedTags = tagRepository.findAllByNameIn(names);
-        var persistedTagsNames = Tags.getNames(persistedTags);
-        var newTagsNames = SetUtils.difference(names, persistedTagsNames);
+        Set<Tag> persistedTags = tagRepository.findAllByNameIn(names);
+        Set<String> persistedTagsNames = Tags.getNames(persistedTags);
+        SetUtils.SetView<String> newTagsNames = SetUtils.difference(names, persistedTagsNames);
 
         log.debug(NEW_TAGS_MESSAGE, newTagsNames);
 
-        var newTags = newTagsNames
+        Set<Tag> newTags = newTagsNames
                 .stream()
                 .map(Tag::new)
                 .collect(Collectors.toSet());

@@ -22,7 +22,7 @@ public class UserDetailsWrapper implements UserDetails {
                 .stream()
                 .map(Enum::name)
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toUnmodifiableSet());
+                .collect(Collectors.toSet());
     }
 
     @Override

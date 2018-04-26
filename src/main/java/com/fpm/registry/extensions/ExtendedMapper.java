@@ -19,11 +19,11 @@ public class ExtendedMapper {
     }
 
     public <D, E> D wrapEntity(D dto, Class<E> entityClass, Function<E, E> action) {
-        var entity = map(dto, entityClass);
-        var result = action.apply(entity);
+        E entity = map(dto, entityClass);
+        E result = action.apply(entity);
 
         @SuppressWarnings("unchecked")
-        var dtoClass = (Class<D>) dto.getClass();
+        Class<D> dtoClass = (Class<D>) dto.getClass();
 
         return map(result, dtoClass);
     }

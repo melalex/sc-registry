@@ -2,7 +2,6 @@ package com.fpm.registry.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -31,7 +30,6 @@ import javax.persistence.TemporalType;
 @Data
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "document", indexes = @Index(name = "name_index", columnList = "name"))
 public class Document {

@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private Optional<User> getCurrentUserInternal() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         log.trace(GET_CURRENT_MESSAGE);
 

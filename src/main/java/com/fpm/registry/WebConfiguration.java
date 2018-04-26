@@ -27,10 +27,10 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        var resolver = new PageableHandlerMethodArgumentResolver();
-        var defaultPage = configurationService.defaultPage();
-        var defaultPageSize = configurationService.defaultPageSize();
-        var maxPageSize = configurationService.maxPageSize();
+        PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
+        int defaultPage = configurationService.defaultPage();
+        int defaultPageSize = configurationService.defaultPageSize();
+        int maxPageSize = configurationService.maxPageSize();
 
         resolver.setOneIndexedParameters(true);
         resolver.setMaxPageSize(maxPageSize);
@@ -59,7 +59,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
-        var localeChangeInterceptor = new LocaleChangeInterceptor();
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName(LANG_PARAMETER_NAME);
         return localeChangeInterceptor;
     }

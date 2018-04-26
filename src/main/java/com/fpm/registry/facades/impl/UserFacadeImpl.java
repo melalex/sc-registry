@@ -20,22 +20,22 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     @Transactional
     public UserDto create(SignUpForm dto) {
-        var toSave = extendedMapper.map(dto, User.class);
-        var saved = userService.create(toSave);
+        User toSave = extendedMapper.map(dto, User.class);
+        User saved = userService.create(toSave);
         return extendedMapper.map(saved, UserDto.class);
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserDto getCurrentUser() {
-        var current = userService.getCurrentUser();
+        User current = userService.getCurrentUser();
         return extendedMapper.map(current, UserDto.class);
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserDto getCurrentUserOrNull() {
-        var current = userService.getCurrentUserOrNull();
+        User current = userService.getCurrentUserOrNull();
         return extendedMapper.map(current, UserDto.class);
     }
 }

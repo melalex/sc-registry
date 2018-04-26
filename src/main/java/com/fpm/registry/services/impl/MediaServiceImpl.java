@@ -6,6 +6,7 @@ import com.fpm.registry.services.ConfigurationService;
 import com.fpm.registry.services.MediaService;
 import com.fpm.registry.services.strategy.NamingStrategy;
 import com.fpm.registry.utils.Exceptions;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotNull;
 
 @Slf4j
 @Service
@@ -29,13 +29,13 @@ public class MediaServiceImpl implements MediaService {
     private static final String DELETE_MESSAGE = "Deleting media [[{}]. Moved from [{}] to [{}]";
     private static final String NEW_MEDIA_MESSAGE = "Created new Media: {}";
 
-    @NotNull
+    @NonNull
     private MediaRepository mediaRepository;
 
-    @NotNull
+    @NonNull
     private NamingStrategy namingStrategy;
 
-    @NotNull
+    @NonNull
     private ConfigurationService configurationService;
 
     private Path fileStorage;
@@ -55,9 +55,9 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Media createMedia(String name, String type) {
-        var media = new Media();
-        var fileName = namingStrategy.provideName(name);
-        var path = fileStorage.resolve(fileName).toString();
+        Media media = new Media();
+        String fileName = namingStrategy.provideName(name);
+        String path = fileStorage.resolve(fileName).toString();
 
         media.setName(fileName);
         media.setStatus(Media.Status.ACTIVE);
@@ -87,8 +87,8 @@ public class MediaServiceImpl implements MediaService {
     @Override
     @SneakyThrows
     public void delete(Media media) {
-        var newPath = recycleBin.resolve(media.getName());
-        var oldPath = Paths.get(media.getPath());
+        Path newPath = recycleBin.resolve(media.getName());
+        Path oldPath = Paths.get(media.getPath());
 
         media.setPath(newPath.toString());
         media.setStatus(Media.Status.DELETED);
@@ -102,7 +102,7 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaAndFile prepareUpdate(Media media, String name, String type) {
-        var newMedia = createMedia(name, type);
+        Media newMedia = createMedia(name, type);
 
         log.info(NEW_MEDIA_MESSAGE, media);
 

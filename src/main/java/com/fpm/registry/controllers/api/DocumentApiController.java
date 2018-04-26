@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import javax.validation.Valid;
 
 @AllArgsConstructor
@@ -51,8 +53,8 @@ public class DocumentApiController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @CacheEvict(value = Caches.SINGLE_DOCUMENT, key = "id")
     public MediaDto updateAttachment(@PathVariable Long id, @Valid DocumentAttachmentWrapper attachment) {
-        var file = attachment.getAttachment();
-        var destination = documentFacade.updateAttachment(id, file.getOriginalFilename(), file.getContentType());
+        MultipartFile file = attachment.getAttachment();
+        File destination = documentFacade.updateAttachment(id, file.getOriginalFilename(), file.getContentType());
 
         MultipartFiles.transfer(file, destination);
 

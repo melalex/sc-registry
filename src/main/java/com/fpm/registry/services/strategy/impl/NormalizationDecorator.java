@@ -10,7 +10,7 @@ public class NormalizationDecorator implements NamingStrategy {
 
     @Override
     public String provideName(String baseName) {
-        var normalized = baseName.replaceAll("..|\\|/", "");
+        String normalized = baseName.replaceAll("..|\\|/", "");
 
         return decorated.provideName(normalized);
     }

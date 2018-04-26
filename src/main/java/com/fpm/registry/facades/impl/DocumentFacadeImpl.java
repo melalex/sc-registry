@@ -24,8 +24,8 @@ public class DocumentFacadeImpl implements DocumentFacade {
     @Override
     @Transactional
     public DocumentDto create(DocumentForm document) {
-        var toSave = extendedMapper.map(document, Document.class);
-        var saved = documentService.create(toSave);
+        Document toSave = extendedMapper.map(document, Document.class);
+        Document saved = documentService.create(toSave);
 
         return extendedMapper.map(saved, DocumentDto.class);
     }
@@ -57,7 +57,7 @@ public class DocumentFacadeImpl implements DocumentFacade {
     @Override
     @Transactional(readOnly = true)
     public DocumentDto getById(Long id) {
-        var entity = documentService.getById(id);
+        Document entity = documentService.getById(id);
         return extendedMapper.map(entity, DocumentDto.class);
     }
 

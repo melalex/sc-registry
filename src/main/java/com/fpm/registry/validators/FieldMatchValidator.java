@@ -22,8 +22,8 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
     @Override
     @SneakyThrows
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        var firstObj = BeanUtils.getProperty(value, firstFieldName);
-        var secondObj = BeanUtils.getProperty(value, secondFieldName);
+        String firstObj = BeanUtils.getProperty(value, firstFieldName);
+        String secondObj = BeanUtils.getProperty(value, secondFieldName);
 
         return Objects.equals(firstObj, secondObj);
     }

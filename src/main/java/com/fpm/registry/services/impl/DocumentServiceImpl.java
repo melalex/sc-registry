@@ -41,7 +41,7 @@ public class DocumentServiceImpl implements DocumentService {
         document.setId(null);
         document.setStatus(Document.Status.INITIAL);
 
-        var savedDocument = documentRepository.save(document);
+        Document savedDocument = documentRepository.save(document);
 
         log.info(NEW_DOCUMENT_MESSAGE, savedDocument.getId());
         log.debug(NEW_DOCUMENT_MESSAGE, savedDocument);
@@ -53,8 +53,8 @@ public class DocumentServiceImpl implements DocumentService {
     public Document commit(Long id) {
         log.info(COMMIT_DOCUMENT_MESSAGE, id);
 
-        var document = getById(id);
-        var activeStatus = Document.Status.ACTIVE;
+        Document document = getById(id);
+        Document.Status activeStatus = Document.Status.ACTIVE;
 
         if (activeStatus.equals(document.getStatus())) {
             log.info(ALREADY_ACTIVE_MESSAGE, id);
@@ -73,11 +73,11 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public Document update(Document document) {
-        var current = getById(document.getId());
+        Document current = getById(document.getId());
 
         Beans.populateNotNull(document, current);
 
-        var savedDocument = documentRepository.save(current);
+        Document savedDocument = documentRepository.save(current);
 
         log.info(UPDATE_DOCUMENT_MESSAGE, savedDocument.getId());
         log.debug(UPDATE_DOCUMENT_MESSAGE, savedDocument);
@@ -87,8 +87,8 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public File updateAttachment(Long id, String name, String type) {
-        var document = getById(id);
-        var mediaAndFile = mediaService.prepareUpdate(document.getAttachment(), name, type);
+        Document document = getById(id);
+        MediaService.MediaAndFile mediaAndFile = mediaService.prepareUpdate(document.getAttachment(), name, type);
 
         document.setAttachment(mediaAndFile.getMedia());
 
@@ -105,8 +105,8 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public Page<Document> getByNameContains(String name, Pageable pageable) {
-        var example = new Document();
-        var user = userService.getCurrentUser();
+        Document example = new Document();
+        User user = userService.getCurrentUser();
 
         log.trace(GET_BY_USER_AND_NAME_MESSAGE, user.getLogin(), name);
 
@@ -116,7 +116,7 @@ public class DocumentServiceImpl implements DocumentService {
             example.setEmployee(user);
         }
 
-        var matcher = ExampleMatcher.matching()
+        ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher(NAME_FIELD, contains());
 
         return documentRepository.findAll(Example.of(example, matcher), pageable);

@@ -41,10 +41,10 @@ public class NotFoundProblemConverter extends AbstractProblemConverter<ResourceN
 
 
     private List<Problem.NestedError> getNestedErrors(ResourceNotFoundException throwable, Locale locale) {
-        var entityName = throwable.getEntityName();
-        var fieldName = throwable.getFieldName();
-        var fieldValue = throwable.getFieldValue();
-        var error = Problem.NestedError.builder()
+        String entityName = throwable.getEntityName();
+        String fieldName = throwable.getFieldName();
+        String fieldValue = throwable.getFieldValue();
+        Problem.NestedError error = Problem.NestedError.builder()
                 .field(fieldName)
                 .message(i18nService.getMessage(ERROR_MESSAGE_CODE, locale, entityName, fieldName, fieldValue))
                 .rejected(fieldValue)
