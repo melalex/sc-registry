@@ -20,7 +20,7 @@ public @interface ApiController {
     @AliasFor("path")
     String[] value() default {};
 
-    @AliasFor(annotation = RequestMapping.class)
+    @AliasFor(attribute = "value", annotation = RequestMapping.class)
     String[] path() default {};
 
     @AliasFor(attribute = "value", annotation = RestController.class)
