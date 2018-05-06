@@ -22,10 +22,9 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Data
 @Entity
@@ -57,15 +56,13 @@ public class Document {
 
     @CreatedDate
     @Column(updatable = false)
-    @Temporal(TemporalType.DATE)
     private LocalDate date;
 
     @CreatedBy
-    @Column(updatable = false)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "document")
+    @ManyToOne(fetch = FetchType.EAGER)
     private User employee;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "document")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Place place;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "document", cascade = CascadeType.ALL)

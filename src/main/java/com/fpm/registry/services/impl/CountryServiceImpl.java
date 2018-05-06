@@ -21,6 +21,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Page<Country> getByNameStartsWith(String name, Pageable pageable) {
         log.trace(GET_BY_NAME_MESSAGE, name);
-        return countryRepository.findAllByByNameStartsWith(name, pageable);
+        return countryRepository.findAllByNameStartsWith(name, pageable);
     }
 }

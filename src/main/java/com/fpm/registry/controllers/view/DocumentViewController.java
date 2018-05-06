@@ -2,7 +2,6 @@ package com.fpm.registry.controllers.view;
 
 import static java.util.List.of;
 
-import com.fpm.registry.annotations.ViewController;
 import com.fpm.registry.dto.DocumentDto;
 import com.fpm.registry.facades.DocumentFacade;
 import com.fpm.registry.services.I18nService;
@@ -14,17 +13,20 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Locale;
 
+@Controller
 @AllArgsConstructor
-@ViewController("/documents")
+@RequestMapping("/documents")
 public class DocumentViewController {
 
     private static final String COMMIT_DOCUMENT_MESSAGE = "messages.document.created";

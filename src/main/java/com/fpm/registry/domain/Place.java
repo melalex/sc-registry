@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Data
@@ -29,7 +29,7 @@ public class Place {
     @Column(name = "canonical_name", length = 100)
     private String canonicalName;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "place")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Country country;
 
     @Enumerated(EnumType.STRING)

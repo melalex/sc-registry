@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Data
@@ -39,7 +39,7 @@ public class User {
     @Column(name = "last_name", length = 40)
     private String lastName;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Position position;
 
     @Enumerated(EnumType.STRING)

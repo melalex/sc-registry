@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
-    Page<Country> findAllByByNameStartsWith(String name, Pageable pageable);
+    Page<Country> findAllByNameStartsWith(String name, Pageable pageable);
 }

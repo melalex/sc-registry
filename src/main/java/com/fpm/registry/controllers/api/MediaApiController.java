@@ -1,14 +1,16 @@
 package com.fpm.registry.controllers.api;
 
-import com.fpm.registry.annotations.ApiController;
 import com.fpm.registry.facades.MediaFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 @AllArgsConstructor
-@ApiController("/api/v1/media")
+@RequestMapping("/api/v1/media")
 public class MediaApiController {
 
     private MediaFacade mediaFacade;

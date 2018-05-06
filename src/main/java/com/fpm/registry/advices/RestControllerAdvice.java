@@ -1,6 +1,5 @@
 package com.fpm.registry.advices;
 
-import com.fpm.registry.annotations.ApiController;
 import com.fpm.registry.exceptions.ResourceNotFoundException;
 import com.fpm.registry.exceptions.UnauthorizedException;
 import com.fpm.registry.problems.Problem;
@@ -12,11 +11,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @AllArgsConstructor
-@ControllerAdvice(annotations = ApiController.class)
-public class ApiControllerAdvice {
+@ControllerAdvice(annotations = RestController.class)
+public class RestControllerAdvice {
 
     private static final String HANDLED_NOT_FOUND_EXCEPTION = "Caught ResourceNotFoundException: {}";
     private static final String HANDLED_UNEXPECTED_EXCEPTION = "Caught Throwable: {}";
