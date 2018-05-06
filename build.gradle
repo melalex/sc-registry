@@ -35,6 +35,8 @@ ext {
     bootstrapVersion = '4.1.0'
     fontAwesomeVersion = '5.0.10'
     popperJsVersion = '1.14.1'
+    locatorVersion = '0.34'
+    layoutDialectVersion = '2.3.0'
 }
 
 dependencies {
@@ -54,11 +56,13 @@ dependencies {
     compile group: 'org.modelmapper', name: 'modelmapper', version: modelMapperVersion
     compile group: 'com.github.jmnarloch', name: 'modelmapper-spring-boot-starter', version: modelMapperStarterVersion
     compile group: 'cz.jirutka.validator', name: 'validator-collection', version: collectionValidatorVersion
+    compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: layoutDialectVersion
 
     compile group: 'org.webjars', name: 'jquery', version: jQueryVersion
     compile group: 'org.webjars', name: 'bootstrap', version: bootstrapVersion
     compile group: 'org.webjars', name: 'font-awesome', version: fontAwesomeVersion
     compile group: 'org.webjars.bower', name: 'popper.js', version: popperJsVersion
+    compile group: 'org.webjars', name: 'webjars-locator', version: locatorVersion
 
     runtime group: 'org.springframework.boot', name: 'spring-boot-devtools'
     runtime group: 'mysql', name: 'mysql-connector-java'

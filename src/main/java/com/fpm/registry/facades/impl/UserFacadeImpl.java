@@ -36,6 +36,6 @@ public class UserFacadeImpl implements UserFacade {
     @Transactional(readOnly = true)
     public UserDto getCurrentUserOrNull() {
         User current = userService.getCurrentUserOrNull();
-        return extendedMapper.map(current, UserDto.class);
+        return extendedMapper.mapNullable(current, UserDto.class);
     }
 }

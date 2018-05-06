@@ -5,6 +5,7 @@ import lombok.experimental.Delegate;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 @Component
@@ -26,5 +27,11 @@ public class ExtendedMapper {
         Class<D> dtoClass = (Class<D>) dto.getClass();
 
         return map(result, dtoClass);
+    }
+
+    public <S, D> D mapNullable(S source, Class<D> clazz) {
+        return Optional.ofNullable(source)
+                .map(mapperFor(clazz))
+                .orElse(null);
     }
 }
