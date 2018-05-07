@@ -12,5 +12,6 @@ public class Urls {
     public static final String CREATE_DOCUMENT = "/create";
 
     public static final String WEBJARS = "/webjars/**";
-    public static final String STATIC = "/static/**";
+    public static final String CSS = "/css/**";
+    public static final String JS = "/js/**";
 }

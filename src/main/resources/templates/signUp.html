@@ -14,10 +14,7 @@
           crossorigin="anonymous"
           th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 
-    <link rel="stylesheet"
-          th:href="@{/webjars/font-awesome/css/font-awesome.css}">
-
-    <link rel="stylesheet" href="../static/css/core.css" th:href="@{/static/css/core.css}"/>
+    <link rel="stylesheet" href="../static/css/core.css" th:href="@{/css/core.css}"/>
 
 </head>
 <body>
@@ -105,8 +102,6 @@
                        th:value="#{views.forms.signUp}">
             </form>
 
-            <script src="../static/js/signUp.js" th:src="@{/static/js/signUp.js}"></script>
-
         </div>
     </div>
 </div>
@@ -116,6 +111,10 @@
         <span class="text-muted">&copy; Melashchenko, 2018</span>
     </div>
 </footer>
+
+<th:block layout:fragment="scripts">
+    <script src="../static/js/signUp.js" th:src="@{/js/signUp.js}"></script>
+</th:block>
 
 </body>
 </html>
