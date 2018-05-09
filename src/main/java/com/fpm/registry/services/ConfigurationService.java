@@ -1,5 +1,7 @@
 package com.fpm.registry.services;
 
+import org.springframework.data.domain.Pageable;
+
 public interface ConfigurationService {
 
     String getFileStoragePath();
@@ -13,4 +15,6 @@ public interface ConfigurationService {
     int maxPageSize();
 
     int getEncoderStrength();
+
+    Pageable getDefaultPageable();
 }

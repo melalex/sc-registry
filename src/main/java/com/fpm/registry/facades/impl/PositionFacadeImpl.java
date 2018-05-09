@@ -19,6 +19,13 @@ public class PositionFacadeImpl implements PositionFacade {
 
     @Override
     @Transactional(readOnly = true)
+    public Page<PositionDto> getAll() {
+        return positionService.getAll()
+                .map(extendedMapper.mapperFor(PositionDto.class));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Page<PositionDto> getAll(Pageable pageable) {
         return positionService.getAll(pageable)
                 .map(extendedMapper.mapperFor(PositionDto.class));

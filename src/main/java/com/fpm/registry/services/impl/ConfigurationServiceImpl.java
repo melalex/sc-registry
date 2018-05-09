@@ -3,6 +3,8 @@ package com.fpm.registry.services.impl;
 import com.fpm.registry.RegistryProperties;
 import com.fpm.registry.services.ConfigurationService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,6 +40,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
     @Override
     public int getEncoderStrength() {
-        return registryProperties.getSecurityProperties().getEncoderStrength();
+        return registryProperties.getSecurity().getEncoderStrength();
+    }
+
+    @Override
+    public Pageable getDefaultPageable() {
+        return PageRequest.of(defaultPage(), defaultPageSize());
     }
 }

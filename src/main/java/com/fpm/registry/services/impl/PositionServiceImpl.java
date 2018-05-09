@@ -2,6 +2,7 @@ package com.fpm.registry.services.impl;
 
 import com.fpm.registry.domain.Position;
 import com.fpm.registry.repositories.PositionRepository;
+import com.fpm.registry.services.ConfigurationService;
 import com.fpm.registry.services.PositionService;
 import com.fpm.registry.utils.Exceptions;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,12 @@ public class PositionServiceImpl implements PositionService {
     private static final String NAME_FIELD = "name";
 
     private PositionRepository positionRepository;
+    private ConfigurationService configurationService;
+
+    @Override
+    public Page<Position> getAll() {
+        return getAll(configurationService.getDefaultPageable());
+    }
 
     @Override
     public Page<Position> getAll(Pageable pageable) {

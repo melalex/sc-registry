@@ -8,6 +8,7 @@ import com.fpm.registry.extensions.ExtendedMapper;
 import com.fpm.registry.facades.UserFacade;
 import com.fpm.registry.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 @Facade
@@ -23,6 +24,11 @@ public class UserFacadeImpl implements UserFacade {
         User toSave = extendedMapper.map(dto, User.class);
         User saved = userService.create(toSave);
         return extendedMapper.map(saved, UserDto.class);
+    }
+
+    @Override
+    public void login(UserDto user, WebAuthenticationDetails details) {
+        userService.login(user.getLogin(), details);
     }
 
     @Override

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "registry")
 public class RegistryProperties {
 
-    private SecurityProperties securityProperties;
-    private FileStorageProperties fileStorage;
-    private PaginationProperties pagination;
+    private SecurityProperties security = new SecurityProperties();
+    private FileStorageProperties fileStorage = new FileStorageProperties();
+    private PaginationProperties pagination = new PaginationProperties();
 
     @Data
     public static class SecurityProperties {

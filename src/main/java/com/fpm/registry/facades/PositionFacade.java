@@ -6,5 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface PositionFacade {
 
+    Page<PositionDto> getAll();
+
     Page<PositionDto> getAll(Pageable pageable);
 }

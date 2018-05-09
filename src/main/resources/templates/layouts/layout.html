@@ -11,7 +11,9 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
           crossorigin="anonymous"
-          th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+          th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}">
+
+    <link th:href="@{/webjars/typeahead.js-bootstrap-css/typeaheadjs.css}" rel="stylesheet">
 
     <link rel="stylesheet" href="../../static/css/core.css" th:href="@{/css/core.css}"/>
 
@@ -31,14 +33,14 @@
 <!--/*@thymesVar id="errors" type="java.util.Collection"*/-->
 <div id="errors" th:each="error: ${errors}">
     <div class="alert alert-danger" role="alert">
-        <strong th:text="#{views.error}">Error</strong> <th:block th:text="error"/>
+        <strong th:text="#{views.error}">Error</strong> <th:block th:text="#{${error}}"/>
     </div>
 </div>
 
 <!--/*@thymesVar id="messages" type="java.util.Collection"*/-->
 <div id="messages" th:each="message: ${messages}">
     <div class="alert alert-primary" role="alert">
-        <strong th:text="#{views.info}">Info</strong> <th:block th:text="message"/>
+        <strong th:text="#{views.info}">Info</strong> <th:block th:text="#{${message}}"/>
     </div>
 </div>
 
@@ -64,7 +66,7 @@
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
         crossorigin="anonymous"></script>
 
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"
+<script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>

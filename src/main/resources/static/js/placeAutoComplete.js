@@ -3,10 +3,11 @@ $(window).load(function () {
     const placeSource = place.data('autocomplete-source');
 
     place.typeahead({
-          source: function (query, callback) {
-              $.get(placeSource, function (data) {
-                  callback(JSON.parse(data).map(e => e.canonicalName))
-              })
-          }
+        source: function (query, callback) {
+            $.get(placeSource, {name: query})
+                .done(function (data) {
+                    callback(data.content.map(e => e.canonicalName))
+                })
+        }
     })
 });

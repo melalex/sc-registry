@@ -5,7 +5,7 @@ registry:
     root: /media
     recycleBin: /media/recycleBin
   pagination:
-    defaultPage: 1
+    defaultPage: 0
     defaultPageSize: 20
     maxPageSize: 100
 

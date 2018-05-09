@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface PositionService {
 
+    Page<Position> getAll();
+
     Page<Position> getAll(Pageable pageable);
 
     Position getByName(String name);

@@ -7,6 +7,8 @@ $("#documentForm").submit(function (event) {
                url: url,
                type: 'post',
                cache: false,
+               contentType: 'application/json',
+               dataType: 'json',
                data: {
                    login: $('#login').val(),
                    password: $('#password').val(),
