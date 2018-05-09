@@ -11,4 +11,6 @@ public interface ConfigurationService {
     int defaultPageSize();
 
     int maxPageSize();
+
+    int getEncoderStrength();
 }

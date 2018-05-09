@@ -1,3 +1,14 @@
+$(window).load(function () {
+    const documentForm = $("#documentForm");
+    const id = documentForm.data('document-id',);
+    const documentCommand = new DocumentCommand(id);
+
+    documentForm.submit(function (event) {
+        event.preventDefault();
+        documentCommand.perform()
+    });
+});
+
 function DocumentCommand(id) {
 
     const that = this;

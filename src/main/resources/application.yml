@@ -1,4 +1,6 @@
 registry:
+  security:
+    encoderStrength: 11
   fileStorage:
     root: /media
     recycleBin: /media/recycleBin

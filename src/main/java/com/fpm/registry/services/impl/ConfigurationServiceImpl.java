@@ -35,4 +35,9 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     public int maxPageSize() {
         return registryProperties.getPagination().getMaxPageSize();
     }
+
+    @Override
+    public int getEncoderStrength() {
+        return registryProperties.getSecurityProperties().getEncoderStrength();
+    }
 }

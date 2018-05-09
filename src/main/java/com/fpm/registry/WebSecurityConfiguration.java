@@ -1,6 +1,9 @@
 package com.fpm.registry;
 
+import com.fpm.registry.services.ConfigurationService;
 import com.fpm.registry.utils.Urls;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,7 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static final int ENCODER_STRENGTH = 11;
+    @Setter(onMethod = @__(@Autowired))
+    private ConfigurationService configurationService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,6 +50,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(ENCODER_STRENGTH);
+        return new BCryptPasswordEncoder(configurationService.getEncoderStrength());
     }
 }

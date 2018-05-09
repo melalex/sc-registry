@@ -31,7 +31,8 @@
 <div class="container margin-top" layout:fragment="content">
     <h1 class="title" th:text="#{views.document}">Document</h1>
 
-    <form id="documentForm" action="#" accept-charset="UTF-8" method="post">
+    <form id="documentForm" action="#" accept-charset="UTF-8" method="post"
+          th:attr="data-document-id=${model.id}">
 
         <div class="form-group">
             <label for="name" th:text="#{views.document.name}">
@@ -66,7 +67,8 @@
             <label for="place" th:text="#{views.document.place}">
                 Place
             </label>
-            <input class="form-control" name="place" id="place"
+            <input class="typeahead form-control" name="place" id="place" data-provide="typeahead"
+                   th:attr="data-autocomplete-source=@{/api/v1/places}"
                    th:placeholder="#{views.document.place}"
                    th:value="${model.place}">
         </div>
@@ -93,23 +95,10 @@
 </footer>
 
 <th:block layout:fragment="scripts">
+    <script th:src="@{/webjars/typeahead.js/dist/typeahead.bundle.min.js}"></script>
     <script src="../static/js/document.js" th:src="@{/js/document.js}"></script>
-
-    <script th:inline="javascript">
-
-        /*<![CDATA[*/
-
-        const documentCommand = new DocumentCommand(/*[[${model.id}]]*/);
-
-        /*]]>*/
-
-        $("#documentForm").submit(function (event) {
-            event.preventDefault();
-            documentCommand.perform()
-        });
-    </script>
+    <script src="../static/js/placeAutoComplete.js" th:src="@{/js/placeAutoComplete.js}"></script>
 </th:block>
-
 
 </body>
 </html>

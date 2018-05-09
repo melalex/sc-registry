@@ -9,18 +9,25 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "registry")
 public class RegistryProperties {
 
-    private FileStorageProperties fileStorage = new FileStorageProperties();
-    private PaginationProperties pagination = new PaginationProperties();
+    private SecurityProperties securityProperties;
+    private FileStorageProperties fileStorage;
+    private PaginationProperties pagination;
 
     @Data
-    public class FileStorageProperties {
+    public static class SecurityProperties {
+
+        private int encoderStrength;
+    }
+
+    @Data
+    public static class FileStorageProperties {
 
         private String root;
         private String recycleBin;
     }
 
     @Data
-    public class PaginationProperties {
+    public static class PaginationProperties {
 
         private int defaultPage;
         private int defaultPageSize;
