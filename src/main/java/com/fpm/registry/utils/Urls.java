@@ -15,6 +15,4 @@ public class Urls {
     public static final String CREATE_DOCUMENT = "/documents/create";
 
     public static final String WEBJARS = "/webjars/**";
-    public static final String CSS = "/css/**";
-    public static final String JS = "/js/**";
 }

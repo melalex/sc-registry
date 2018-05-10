@@ -3,16 +3,15 @@ package com.fpm.registry.security;
 import com.fpm.registry.services.UserService;
 import com.fpm.registry.utils.Exceptions;
 import com.fpm.registry.wrapper.UserDetailsWrapper;
-import lombok.AllArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
-@Service
-@AllArgsConstructor
 public class UserDetailsServiceAdapter implements UserDetailsService {
 
+    @Setter(onMethod = @__(@Autowired))
     private UserService userService;
 
     @Override

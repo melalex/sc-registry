@@ -28,6 +28,12 @@
 </nav>
 
 <div class="container margin-top" layout:fragment="content">
+    <th:block th:if="${param.errors != null}">
+        <div class="alert alert-danger" role="alert">
+            <strong th:text="#{views.error}">Error</strong> <th:block th:text="#{${param.errors}}"/>
+        </div>
+    </th:block>
+
     <div class="text-center">
         <h1 class="title" th:text="#{views.forms.signIn}">Sign in</h1>
         <hr/>

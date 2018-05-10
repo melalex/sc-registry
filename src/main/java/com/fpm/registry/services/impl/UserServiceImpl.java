@@ -10,10 +10,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -26,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private AuthenticationManager authenticationManager;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User create(User user) {
@@ -35,6 +38,11 @@ public class UserServiceImpl implements UserService {
 
         getByLogin(user.getLogin())
                 .ifPresent(Exceptions.userAlreadyExists());
+
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+
+        user.setPassword(encodedPassword);
+        user.setRoles(Set.of(User.Role.ROLE_USER));
 
         return userRepository.save(user);
     }
