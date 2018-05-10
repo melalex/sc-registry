@@ -1,4 +1,4 @@
-$(window).load(function () {
+$(document).ready(function () {
     const place = $('#place');
     const placeSource = place.data('autocomplete-source');
 

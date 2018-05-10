@@ -1,4 +1,4 @@
-$(window).load(function () {
+$(document).ready(function () {
     const documentForm = $("#documentForm");
     const id = documentForm.data('document-id',);
     const documentCommand = new DocumentCommand(id);
