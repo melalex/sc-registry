@@ -4,6 +4,8 @@ $(document).ready(function () {
         event.preventDefault();
 
         const url = userForm.data('create-url');
+        const token = $("meta[name='_csrf']").attr("content");
+        const header = $("meta[name='_csrf_header']").attr("content");
 
         $.ajax({
                    url: url,
@@ -11,18 +13,21 @@ $(document).ready(function () {
                    cache: false,
                    contentType: 'application/json',
                    dataType: 'json',
-                   data: {
+                   beforeSend: function (xhr) {
+                       xhr.setRequestHeader(header, token);
+                   },
+                   data: JSON.stringify({
                        login: $('#login').val(),
                        password: $('#password').val(),
                        repeatPassword: $('#repeatPassword').val(),
                        firstName: $('#firstName').val(),
                        lastName: $('#lastName').val(),
                        position: $('#position').val()
-                   },
+                   }),
                    success: function (data, status, request) {
                        window.location = request.getResponseHeader('Location')
                    },
-                   error: errorHandler.handle
+                   error: new customErrorHandler().handle
                })
     });
 });

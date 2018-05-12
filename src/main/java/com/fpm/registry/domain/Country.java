@@ -1,6 +1,7 @@
 package com.fpm.registry.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "country", indexes = @Index(name = "name_index", columnList = "name", unique = true))
 public class Country {
 

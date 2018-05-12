@@ -6,6 +6,8 @@
 <head>
     <title th:text="${@environment.getProperty('spring.application.name')}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -29,17 +31,27 @@
 </div>
 
 <!--/*@thymesVar id="errors" type="java.util.Collection"*/-->
-<div id="errors" th:each="error: ${errors}">
-    <div class="alert alert-danger" role="alert">
-        <strong th:text="#{views.error}">Error</strong> <th:block th:text="#{${error}}"/>
-    </div>
+<div class="container margin-top" id="errors">
+    <th:block th:each="error: ${errors}">
+        <div class="alert alert-danger" role="alert">
+            <strong th:text="#{views.error}">Error</strong> <th:block th:text="#{${error}}"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </th:block>
 </div>
 
 <!--/*@thymesVar id="messages" type="java.util.Collection"*/-->
-<div id="messages" th:each="message: ${messages}">
-    <div class="alert alert-primary" role="alert">
-        <strong th:text="#{views.info}">Info</strong> <th:block th:text="#{${message}}"/>
-    </div>
+<div class="container margin-top" id="messages">
+    <th:block th:each="message: ${messages}">
+        <div class="alert alert-primary" role="alert">
+            <strong th:text="#{views.info}">Info</strong> <th:block th:text="#{${message}}"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </th:block>
 </div>
 
 <div class="container" layout:fragment="content">

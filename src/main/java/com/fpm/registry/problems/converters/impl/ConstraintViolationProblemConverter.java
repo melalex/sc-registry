@@ -1,6 +1,8 @@
 package com.fpm.registry.problems.converters.impl;
 
 import com.fpm.registry.problems.Problem;
+import com.fpm.registry.services.I18nService;
+import com.fpm.registry.utils.Messages;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,7 @@ import javax.validation.Path;
 public class ConstraintViolationProblemConverter extends AbstractProblemConverter<ConstraintViolationException> {
 
     private Clock clock;
+    private I18nService i18nService;
 
     @Override
     protected Class<ConstraintViolationException> getTarget() {
@@ -34,7 +37,7 @@ public class ConstraintViolationProblemConverter extends AbstractProblemConverte
         return Problem.builder()
                 .timestamp(LocalDateTime.now(clock))
                 .type(throwable.getClass().getSimpleName())
-                .detail(throwable.getLocalizedMessage())
+                .detail(i18nService.getMessage(Messages.VALIDATION_ERROR, locale))
                 .status(HttpStatus.UNPROCESSABLE_ENTITY.value())
                 .errors(toErrors(throwable))
                 .build();

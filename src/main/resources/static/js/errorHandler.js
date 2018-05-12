@@ -1,13 +1,17 @@
-const errorHandler = function () {
+const customErrorHandler = function () {
 
     function handleError(jqXHR) {
-        const problem = JSON.parse(jqXHR.responseText);
+        const problem = jqXHR.responseJSON;
 
-        $('<div/>', {'class': 'alert alert-primary', 'role': 'alert'})
+        $('<div/>', {'class': 'alert alert-danger', 'role': 'alert'})
             .append(problem.detail)
+            .append(
+                $('<button/>', {'class': 'close', 'data-dismiss': 'alert', 'aria-label': 'Close'})
+                    .append($('<span/>', {'aria-hidden': 'true'}).append('&times;'))
+            )
             .appendTo('#errors');
 
-        for (let error in problem.errors) {
+        for (let error of problem.errors) {
             $(`input#${error.field}`)
                 .after($('<div/>').addClass('invalid-feedback').append(error.message))
                 .addClass('is-invalid ')

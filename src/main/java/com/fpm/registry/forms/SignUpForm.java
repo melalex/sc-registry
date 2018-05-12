@@ -1,7 +1,10 @@
 package com.fpm.registry.forms;
 
+import com.fpm.registry.constraints.AtLeastOneDigit;
+import com.fpm.registry.constraints.AtLeastOneLowerCaseLatter;
+import com.fpm.registry.constraints.AtLeastOneSpecialCharacter;
+import com.fpm.registry.constraints.AtLeastOneUpperCaseLatter;
 import com.fpm.registry.constraints.FieldMatch;
-import com.fpm.registry.constraints.HardPassword;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -14,7 +17,12 @@ public class SignUpForm {
     @Size(min = 3, max = 40)
     private String login;
 
-    @HardPassword
+    @NotNull
+    @AtLeastOneDigit
+    @Size(min = 6, max = 255)
+    @AtLeastOneLowerCaseLatter
+    @AtLeastOneUpperCaseLatter
+    @AtLeastOneSpecialCharacter
     private String password;
     private String repeatPassword;
 

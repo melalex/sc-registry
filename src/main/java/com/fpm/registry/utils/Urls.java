@@ -11,7 +11,6 @@ public class Urls {
     public static final String LOGIN = "/signIn";
     public static final String LOGIN_FAIL = LOGIN + "?errors=" + SIGN_IN_ERROR_MESSAGE;
     public static final String REGISTER = "/signUp";
-    public static final String CREATE_USER = "/users";
     public static final String CREATE_DOCUMENT = "/documents/create";
 
     public static final String WEBJARS = "/webjars/**";

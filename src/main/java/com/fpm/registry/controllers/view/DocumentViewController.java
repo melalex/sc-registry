@@ -6,6 +6,7 @@ import com.fpm.registry.dto.DocumentDto;
 import com.fpm.registry.facades.DocumentFacade;
 import com.fpm.registry.services.I18nService;
 import com.fpm.registry.utils.Caches;
+import com.fpm.registry.utils.Messages;
 import com.fpm.registry.utils.Views;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -28,8 +29,6 @@ import java.util.Locale;
 @AllArgsConstructor
 @RequestMapping("/documents")
 public class DocumentViewController {
-
-    private static final String COMMIT_DOCUMENT_MESSAGE = "messages.document.created";
 
     private DocumentFacade documentFacade;
     private I18nService i18nService;
@@ -60,6 +59,6 @@ public class DocumentViewController {
     public ModelAndView commit(@PathVariable Long id, Locale locale) {
         documentFacade.commit(id);
 
-        return Views.redirectToIndex(of(i18nService.getMessage(COMMIT_DOCUMENT_MESSAGE, locale)));
+        return Views.redirectToIndex(of(i18nService.getMessage(Messages.COMMIT_DOCUMENT_MESSAGE, locale)));
     }
 }

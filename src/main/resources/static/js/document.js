@@ -14,20 +14,25 @@ function DocumentCommand(id) {
     const that = this;
 
     this.documentId = id;
+    this.token = $("meta[name='_csrf']").attr("content");
+    this.header = $("meta[name='_csrf_header']").attr("content");
+
 
     const createMedia = function () {
         const formData = new FormData();
 
-        formData.append('id', that.documentId);
         formData.append('attachment', $('#attachment').get(0).files.get(0));
 
         $.ajax({
                    url: `/api/v1/documents/${that.documentId}/media`,
                    type: 'patch',
+                   beforeSend: function (xhr) {
+                       xhr.setRequestHeader(that.header, that.token);
+                   },
                    data: formData,
                    cache: false,
                    success: commit,
-                   error: errorHandler.handle
+                   error: new customErrorHandler().handle
                })
     };
 
@@ -36,10 +41,13 @@ function DocumentCommand(id) {
                    url: `/${that.documentId}/commit`,
                    type: 'patch',
                    cache: false,
+                   beforeSend: function (xhr) {
+                       xhr.setRequestHeader(that.header, that.token);
+                   },
                    success: function (data, status, request) {
                        window.location = request.getResponseHeader('Location')
                    },
-                   error: errorHandler.handle
+                   error: new customErrorHandler().handle
                })
     };
 
@@ -48,17 +56,22 @@ function DocumentCommand(id) {
                    url: '/api/v1/documents',
                    type: 'post',
                    cache: false,
-                   data: {
+                   contentType: 'application/json',
+                   dataType: 'json',
+                   beforeSend: function (xhr) {
+                       xhr.setRequestHeader(that.header, that.token);
+                   },
+                   data: JSON.stringify({
                        name: $('#name').val(),
                        description: $('#description').val(),
                        tags: $('#tags').val(),
                        place: $('#place').val()
-                   },
+                   }),
                    success: function (data) {
                        that.documentId = data.id;
                        createMedia()
                    },
-                   error: errorHandler.handle
+                   error: new customErrorHandler().handle
                })
     };
 
@@ -67,19 +80,24 @@ function DocumentCommand(id) {
                    url: '/api/v1/documents',
                    cache: false,
                    type: 'patch',
-                   data: {
+                   contentType: 'application/json',
+                   dataType: 'json',
+                   beforeSend: function (xhr) {
+                       xhr.setRequestHeader(that.header, that.token);
+                   },
+                   data: JSON.stringify({
                        id: that.documentId,
                        name: $('#name').val(),
                        description: $('#description').val(),
                        tags: $('#tags').val().split(" "),
                        place: $('#place').val()
-                   },
+                   }),
                    success: function (data) {
                        if (!data.attachment || $('#attachment').get(0).files.length) {
                            createMedia()
                        }
                    },
-                   error: errorHandler.handle
+                   error: new customErrorHandler().handle
                })
     };
 
