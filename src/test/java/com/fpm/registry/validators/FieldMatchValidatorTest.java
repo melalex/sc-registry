@@ -52,7 +52,7 @@ public class FieldMatchValidatorTest {
     }
 
     @Value
-    private static class TestObject {
+    public static class TestObject {
 
         private String first;
         private String second;

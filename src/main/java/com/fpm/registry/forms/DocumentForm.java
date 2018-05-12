@@ -1,9 +1,7 @@
 package com.fpm.registry.forms;
 
-import cz.jirutka.validator.collection.constraints.EachNotBlank;
-import cz.jirutka.validator.collection.constraints.EachSize;
+import com.fpm.registry.constraints.EachSize;
 import lombok.Data;
-import lombok.NonNull;
 
 import java.util.Set;
 import javax.validation.constraints.NotNull;
@@ -20,11 +18,10 @@ public class DocumentForm {
     @Size(max = 255)
     private String description;
 
-    @EachNotBlank
     @Size(max = 6)
-    @EachSize(min = 1, max = 40)
+    @EachSize(min = 1, max = 40, notNull = true)
     private Set<String> tags;
 
-    @NonNull
+    @NotNull
     private String place;
 }

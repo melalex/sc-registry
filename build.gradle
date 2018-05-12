@@ -30,7 +30,6 @@ ext {
     beanUtilsVersion = '1.9.3'
     modelMapperStarterVersion = '1.1.0'
     modelMapperVersion = '1.1.3'
-    collectionValidatorVersion = '2.2.0'
 
     locatorVersion = '0.34'
     layoutDialectVersion = '2.3.0'
@@ -40,7 +39,7 @@ ext {
     popperJsVersion = '1.14.1'
     typeaheadVersion = '0.11.1'
     typeaheadPluginVersion = '3.1.1'
-    typeaheadCssVersion = '1.2.1'
+    typeaheadCssVersion = '1.0.0'
 }
 
 dependencies {
@@ -59,7 +58,6 @@ dependencies {
     compile group: 'commons-beanutils', name: 'commons-beanutils', version: beanUtilsVersion
     compile group: 'org.modelmapper', name: 'modelmapper', version: modelMapperVersion
     compile group: 'com.github.jmnarloch', name: 'modelmapper-spring-boot-starter', version: modelMapperStarterVersion
-    compile group: 'cz.jirutka.validator', name: 'validator-collection', version: collectionValidatorVersion
     compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: layoutDialectVersion
 
     compile group: 'org.webjars', name: 'jquery', version: jQueryVersion
@@ -68,7 +66,7 @@ dependencies {
     compile group: 'org.webjars', name: 'Bootstrap-3-Typeahead', version: typeaheadPluginVersion
     compile group: 'org.webjars.bower', name: 'popper.js', version: popperJsVersion
     compile group: 'org.webjars.bower', name: 'typeahead.js', version: typeaheadVersion
-    compile group: 'org.webjars.bower', name: 'typeahead.js-bootstrap-css', version: typeaheadCssVersion
+    compile group: 'org.webjars.npm', name: 'typeahead.js-bootstrap4-css', version: typeaheadCssVersion
 
     runtime group: 'org.springframework.boot', name: 'spring-boot-devtools'
     runtime group: 'mysql', name: 'mysql-connector-java'
@@ -78,6 +76,7 @@ dependencies {
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testCompile group: 'org.springframework.security', name: 'spring-security-test'
+    testCompile group: 'org.projectlombok', name: 'lombok'
 
     testCompileOnly group: 'org.projectlombok', name: 'lombok'
 }

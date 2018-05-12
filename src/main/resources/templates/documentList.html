@@ -14,7 +14,7 @@
           crossorigin="anonymous"
           th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 
-    <link rel="stylesheet" href="../static/css/core.css" th:href="@{/static/css/core.css}"/>
+    <link rel="stylesheet" href="../static/css/core.css" th:href="@{/css/core.css}"/>
 
 </head>
 <body>
@@ -52,11 +52,11 @@
         </div>
     </div>
 
-    <h1 class="text-center no-result-text" th:text="#{views.result.empty}" th:unless="${model.hasContent}">
+    <h1 class="text-center no-result-text" th:text="#{views.result.empty}" th:unless="${model.hasContent()}">
         Nothing to show
     </h1>
 
-    <table class="table table-hover" th:if="${model.hasContent}">
+    <table class="table table-hover" th:if="${model.hasContent()}">
         <thead>
         <tr>
             <th th:text="#{views.document.id}">Id</th>

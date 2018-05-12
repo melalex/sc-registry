@@ -30,7 +30,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 //        @formatter:off
         http.authorizeRequests()
-                .antMatchers(Urls.REGISTER, Urls.WEBJARS, Urls.LOGIN).permitAll()
+                .antMatchers(Urls.REGISTER, Urls.WEBJARS_MATCHER, Urls.LOGIN_MATCHER).permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()
                 .and()

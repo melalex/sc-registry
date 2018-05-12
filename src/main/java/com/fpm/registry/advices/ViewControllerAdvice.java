@@ -1,7 +1,9 @@
 package com.fpm.registry.advices;
 
 import com.fpm.registry.exceptions.ResourceNotFoundException;
+import com.fpm.registry.exceptions.UnauthorizedException;
 import com.fpm.registry.facades.UserFacade;
+import com.fpm.registry.utils.Urls;
 import com.fpm.registry.utils.Views;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ViewControllerAdvice {
 
     private static final String HANDLED_NOT_FOUND_EXCEPTION = "Caught ResourceNotFoundException: {}";
+    private static final String HANDLED_UNAUTHORIZED_EXCEPTION = "Caught UnauthorizedException: {}";
     private static final String HANDLED_UNEXPECTED_EXCEPTION = "Caught Throwable: {}";
 
     private static final String USER_ATTRIBUTE = "user";
@@ -32,6 +35,13 @@ public class ViewControllerAdvice {
         log.debug(HANDLED_NOT_FOUND_EXCEPTION, exception.getMessage());
 
         return Views.from(Views.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ModelAndView handleUnexpectedException(UnauthorizedException exception) {
+        log.debug(HANDLED_UNAUTHORIZED_EXCEPTION, exception.getMessage());
+
+        return Views.redirectTo(Urls.LOGIN);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

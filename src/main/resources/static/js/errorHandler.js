@@ -1,4 +1,4 @@
-const customErrorHandler = function () {
+const CustomErrorHandler = function () {
 
     function handleError(jqXHR) {
         const problem = jqXHR.responseJSON;

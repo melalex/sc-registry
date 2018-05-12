@@ -42,7 +42,7 @@ public class DocumentApiController {
     @PatchMapping
     @PreAuthorize("hasRole('ROLE_USER')")
     @CacheEvict(value = Caches.SINGLE_DOCUMENT, key = "document.id")
-    public DocumentDto update(@RequestBody @Valid DocumentDto document) {
+    public DocumentDto update(@Valid DocumentDto document) {
         return documentFacade.update(document);
     }
 

@@ -39,7 +39,7 @@ public class DocumentViewController {
         return Views.from(Views.DOCUMENT_LIST, model);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:[0-9]+}")
     @Cacheable(value = Caches.SINGLE_DOCUMENT, key = "id")
     public ModelAndView getById(@PathVariable Long id) {
         DocumentDto model = documentFacade.getById(id);

@@ -8,26 +8,26 @@ $(document).ready(function () {
         const header = $("meta[name='_csrf_header']").attr("content");
 
         $.ajax({
-                   url: url,
-                   type: 'post',
-                   cache: false,
-                   contentType: 'application/json',
-                   dataType: 'json',
-                   beforeSend: function (xhr) {
-                       xhr.setRequestHeader(header, token);
-                   },
-                   data: JSON.stringify({
-                       login: $('#login').val(),
-                       password: $('#password').val(),
-                       repeatPassword: $('#repeatPassword').val(),
-                       firstName: $('#firstName').val(),
-                       lastName: $('#lastName').val(),
-                       position: $('#position').val()
-                   }),
-                   success: function (data, status, request) {
-                       window.location = request.getResponseHeader('Location')
-                   },
-                   error: new customErrorHandler().handle
-               })
+            url: url,
+            type: 'post',
+            cache: false,
+            contentType: 'application/json',
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            data: JSON.stringify({
+                login: $('#login').val(),
+                password: $('#password').val(),
+                repeatPassword: $('#repeatPassword').val(),
+                firstName: $('#firstName').val(),
+                lastName: $('#lastName').val(),
+                position: $('#position').val()
+            }),
+            success: function (data, status, request) {
+                window.location = request.getResponseHeader('Location')
+            },
+            error: new CustomErrorHandler().handle
+        })
     });
 });

@@ -1,6 +1,6 @@
 logging:
   level:
-    org.springframework.web: debug
+    org.springframework.web: info
     com.fpm.registry: trace
     org.hibernate: info
 
