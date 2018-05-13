@@ -8,6 +8,8 @@ public interface ConfigurationService {
 
     String getRecycleBinPath();
 
+    String getTempDirectoryPath();
+
     int defaultPage();
 
     int defaultPageSize();
@@ -17,4 +19,6 @@ public interface ConfigurationService {
     int getEncoderStrength();
 
     Pageable getDefaultPageable();
+
+    long maxAttachmentSize();
 }

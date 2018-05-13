@@ -21,11 +21,13 @@ function DocumentCommand(id) {
     const createMedia = function () {
         const formData = new FormData();
 
-        formData.append('attachment', $('#attachment').get(0).files.get(0));
+        formData.append('attachment', $('#attachment')[0].files[0]);
 
         $.ajax({
             url: `/api/v1/documents/${that.documentId}/media`,
             type: 'patch',
+            contentType: false,
+            processData: false,
             beforeSend: function (xhr) {
                 xhr.setRequestHeader(that.header, that.token);
             },

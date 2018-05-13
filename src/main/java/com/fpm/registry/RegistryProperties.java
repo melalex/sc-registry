@@ -24,6 +24,8 @@ public class RegistryProperties {
 
         private String root;
         private String recycleBin;
+        private String tempDirectory;
+        private long maxFileSize;
     }
 
     @Data

@@ -1,3 +1,9 @@
+registry:
+  fileStorage:
+    root: D:\registry\media
+    recycleBin: D:\registry\media\recycleBin
+    tempDirectory: D:\registry\tmp
+
 logging:
   level:
     org.springframework.web: info

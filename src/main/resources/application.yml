@@ -2,8 +2,7 @@ registry:
   security:
     encoderStrength: 11
   fileStorage:
-    root: /media
-    recycleBin: /media/recycleBin
+    maxFileSize: 10240
   pagination:
     defaultPage: 0
     defaultPageSize: 20

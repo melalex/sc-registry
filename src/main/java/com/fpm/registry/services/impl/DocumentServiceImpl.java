@@ -89,8 +89,7 @@ public class DocumentServiceImpl implements DocumentService {
     public File updateAttachment(Long id, String name, String type) {
         Document document = getById(id);
         MediaService.MediaAndFile mediaAndFile = mediaService.prepareUpdate(document.getAttachment(), name, type);
-
-        document.setAttachment(mediaAndFile.getMedia());
+        mediaAndFile.getMedia().setDocument(document);
 
         documentRepository.save(document);
 
@@ -111,6 +110,7 @@ public class DocumentServiceImpl implements DocumentService {
         log.trace(GET_BY_USER_AND_NAME_MESSAGE, user.getLogin(), name);
 
         example.setName(name);
+        example.setStatus(Document.Status.ACTIVE);
 
         if (!user.getRoles().contains(User.Role.ROLE_ADMIN)) {
             example.setEmployee(user);

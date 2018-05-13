@@ -38,7 +38,8 @@
         <div class="col-md-4">
             <form th:action="@{/documents}" class="form-inline" method="get">
                 <label class="sr-only" for="name" th:text="#{views.document.name}">Name</label>
-                <input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name">
+                <input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name"
+                       th:placeholder="#{views.action.search}">
 
                 <button class="btn btn-primary search-button" th:text="#{views.action.search}">Search</button>
             </form>
@@ -46,7 +47,8 @@
         <div class="col-md-6"></div>
 
         <div class="col-md-2">
-            <a class="btn btn-success search-button" href="#" th:href="@{/documents/create}" th:text="#{views.action.create}">
+            <a class="btn btn-success search-button" href="#" th:href="@{/documents/create}"
+               th:text="#{views.action.create}">
                 Create
             </a>
         </div>
@@ -56,7 +58,7 @@
         Nothing to show
     </h1>
 
-    <table class="table table-hover" th:if="${model.hasContent()}">
+    <table class="table table-hover margin-top" th:if="${model.hasContent()}">
         <thead>
         <tr>
             <th th:text="#{views.document.id}">Id</th>

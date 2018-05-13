@@ -4,6 +4,7 @@ import com.fpm.registry.domain.User;
 import com.fpm.registry.repositories.UserRepository;
 import com.fpm.registry.services.UserService;
 import com.fpm.registry.utils.Exceptions;
+import com.fpm.registry.utils.Logs;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -81,10 +82,9 @@ public class UserServiceImpl implements UserService {
     private Optional<User> getCurrentUserInternal() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        log.trace(GET_CURRENT_MESSAGE, authentication);
-
         return Optional.ofNullable(authentication)
                 .map(Authentication::getName)
+                .map(Logs.debug(log, GET_CURRENT_MESSAGE))
                 .flatMap(userRepository::findOneByLogin);
     }
 }

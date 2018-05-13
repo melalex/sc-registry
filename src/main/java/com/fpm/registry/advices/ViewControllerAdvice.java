@@ -29,6 +29,11 @@ public class ViewControllerAdvice {
 
     private UserFacade userFacade;
 
+    @ModelAttribute
+    public void addCurrentUser(Model model) {
+        model.addAttribute(USER_ATTRIBUTE, userFacade.getCurrentUserOrNull());
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
     public ModelAndView handleNotFound(ResourceNotFoundException exception) {
@@ -50,10 +55,5 @@ public class ViewControllerAdvice {
         log.error(HANDLED_UNEXPECTED_EXCEPTION, exception);
 
         return Views.from(Views.INTERNAL_SERVER_ERROR);
-    }
-
-    @ModelAttribute
-    public void addCurrentUser(Model model) {
-        model.addAttribute(USER_ATTRIBUTE, userFacade.getCurrentUserOrNull());
     }
 }

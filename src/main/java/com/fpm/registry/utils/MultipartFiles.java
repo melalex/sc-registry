@@ -1,5 +1,6 @@
 package com.fpm.registry.utils;
 
+import com.fpm.registry.exceptions.UnexpectedException;
 import lombok.experimental.UtilityClass;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +16,7 @@ public class MultipartFiles {
         try {
             source.transferTo(destination);
         } catch (IOException e) {
-            throw new UnsupportedOperationException(ERROR_MESSAGE, e);
+            throw new UnexpectedException(ERROR_MESSAGE, e);
         }
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,6 +35,7 @@ public class DocumentViewController {
     private I18nService i18nService;
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView getByNameContains(@RequestParam(required = false) String name, Pageable pageable) {
         Page<DocumentDto> model = documentFacade.getByNameContains(name, pageable);
         return Views.from(Views.DOCUMENT_LIST, model);

@@ -15,3 +15,5 @@ build/
 
 ### Custom ###
 /test/
+/media/
+/tmp/

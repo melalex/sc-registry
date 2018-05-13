@@ -6,7 +6,6 @@ import com.fpm.registry.facades.DocumentFacade;
 import com.fpm.registry.forms.DocumentForm;
 import com.fpm.registry.utils.Caches;
 import com.fpm.registry.utils.MultipartFiles;
-import com.fpm.registry.wrapper.DocumentAttachmentWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
@@ -54,11 +53,11 @@ public class DocumentApiController {
     @PatchMapping("/{id}/media")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @CacheEvict(value = Caches.SINGLE_DOCUMENT, key = "id")
-    public MediaDto updateAttachment(@PathVariable Long id, @Valid DocumentAttachmentWrapper attachment) {
-        MultipartFile file = attachment.getAttachment();
-        File destination = documentFacade.updateAttachment(id, file.getOriginalFilename(), file.getContentType());
+    public MediaDto updateAttachment(@PathVariable Long id, MultipartFile attachment) {
+        File destination =
+                documentFacade.updateAttachment(id, attachment.getOriginalFilename(), attachment.getContentType());
 
-        MultipartFiles.transfer(file, destination);
+        MultipartFiles.transfer(attachment, destination);
 
         return documentFacade.getById(id).getAttachment();
     }

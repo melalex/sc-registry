@@ -24,6 +24,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     }
 
     @Override
+    public String getTempDirectoryPath() {
+        return registryProperties.getFileStorage().getTempDirectory();
+    }
+
+    @Override
     public int defaultPage() {
         return registryProperties.getPagination().getDefaultPage();
     }
@@ -46,5 +51,10 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     @Override
     public Pageable getDefaultPageable() {
         return PageRequest.of(defaultPage(), defaultPageSize());
+    }
+
+    @Override
+    public long maxAttachmentSize() {
+        return registryProperties.getFileStorage().getMaxFileSize();
     }
 }

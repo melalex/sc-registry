@@ -6,6 +6,7 @@ import com.fpm.registry.services.TagService;
 import com.fpm.registry.utils.Tags;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.SetUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,9 @@ public class TagServiceImpl implements TagService {
         Set<String> persistedTagsNames = Tags.getNames(persistedTags);
         SetUtils.SetView<String> newTagsNames = SetUtils.difference(names, persistedTagsNames);
 
-        log.debug(NEW_TAGS_MESSAGE, newTagsNames);
+        if (CollectionUtils.isNotEmpty(newTagsNames)) {
+            log.info(NEW_TAGS_MESSAGE, newTagsNames);
+        }
 
         Set<Tag> newTags = newTagsNames
                 .stream()
