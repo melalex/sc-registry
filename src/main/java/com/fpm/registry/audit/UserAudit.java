@@ -16,6 +16,6 @@ public class UserAudit implements AuditorAware<User> {
 
     @Override
     public Optional<User> getCurrentAuditor() {
-        return Optional.of(userService.getCurrentUser());
+        return Optional.of(userService.getCurrentAuditor());
     }
 }

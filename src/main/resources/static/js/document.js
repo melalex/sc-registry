@@ -40,7 +40,7 @@ function DocumentCommand(id) {
 
     const commit = function () {
         $.ajax({
-            url: `/${that.documentId}/commit`,
+            url: `/documents/${that.documentId}/commit`,
             type: 'patch',
             cache: false,
             beforeSend: function (xhr) {

@@ -104,7 +104,7 @@ public class MediaServiceImpl implements MediaService {
     public MediaAndFile prepareUpdate(Media media, String name, String type) {
         Media newMedia = createMedia(name, type);
 
-        log.info(NEW_MEDIA_MESSAGE, media);
+        log.info(NEW_MEDIA_MESSAGE, newMedia);
 
         if (Objects.nonNull(media)) {
             delete(media);

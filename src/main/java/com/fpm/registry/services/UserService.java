@@ -11,6 +11,8 @@ public interface UserService {
 
     User getCurrentUser();
 
+    User getCurrentAuditor();
+
     User getCurrentUserOrNull();
 
     Optional<User> getByLogin(String username);
