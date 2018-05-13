@@ -47,4 +47,16 @@ public class Media {
         ACTIVE,
         DELETED
     }
+
+    @Override
+    public String toString() {
+        return "Media{" +
+               "id=" + id +
+               ", status=" + status +
+               ", name='" + name + '\'' +
+               ", originalName='" + originalName + '\'' +
+               ", path='" + path + '\'' +
+               ", type='" + type + '\'' +
+               '}';
+    }
 }

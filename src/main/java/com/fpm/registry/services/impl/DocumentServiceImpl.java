@@ -3,6 +3,7 @@ package com.fpm.registry.services.impl;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
 import com.fpm.registry.domain.Document;
+import com.fpm.registry.domain.Media;
 import com.fpm.registry.domain.User;
 import com.fpm.registry.repositories.DocumentRepository;
 import com.fpm.registry.services.DocumentService;
@@ -89,7 +90,9 @@ public class DocumentServiceImpl implements DocumentService {
     public File updateAttachment(Long id, String name, String type) {
         Document document = getById(id);
         MediaService.MediaAndFile mediaAndFile = mediaService.prepareUpdate(document.getAttachment(), name, type);
-        mediaAndFile.getMedia().setDocument(document);
+        Media media = mediaAndFile.getMedia();
+        media.setDocument(document);
+        document.setAttachment(media);
 
         documentRepository.save(document);
 

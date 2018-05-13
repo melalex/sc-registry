@@ -1,8 +1,8 @@
 package com.fpm.registry.facades;
 
-import java.io.File;
+import com.fpm.registry.dto.MediaFileVo;
 
 public interface MediaFacade {
 
-    File getFile(Long id);
+    MediaFileVo getMediaFile(Long id);
 }

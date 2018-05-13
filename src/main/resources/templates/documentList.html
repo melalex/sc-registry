@@ -67,12 +67,12 @@
             <th th:text="#{views.document.date}">Date</th>
         </tr>
         </thead>
-        <tbody th:each="document : ${model.content}">
         <!--/*@thymesVar id="document" type="com.fpm.registry.dto.DocumentDto"*/-->
+        <tbody th:each="document : ${model.content}">
         <tr>
             <td th:text="${document.id}">1</td>
             <td>
-                <a th:href="@{/documents/{id}(id = document.id)}" th:text="#{views.document.name}">Name</a>
+                <a th:href="@{/documents/{id}(id = ${document.id})}" th:text="#{views.document.name}">Name</a>
             </td>
             <td th:text="${document.employee.fullName}">John Johnson</td>
             <td th:text="${document.date}">04/22/2018</td>

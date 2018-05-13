@@ -49,6 +49,7 @@
             </label>
             <textarea class="form-control" name="description" id="description"
                       th:placeholder="#{views.document.description}"
+                      th:text="${model?.description}"
                       th:value="${model?.description}"></textarea>
         </div>
 
@@ -68,7 +69,7 @@
             <input class="typeahead form-control" name="place" id="place" data-provide="typeahead"
                    th:attr="data-autocomplete-source=@{/api/v1/places}"
                    th:placeholder="#{views.document.place}"
-                   th:value="${model?.place}">
+                   th:value="${model?.place.canonicalName}">
         </div>
 
         <div class="form-group">
