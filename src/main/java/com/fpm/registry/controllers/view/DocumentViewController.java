@@ -37,7 +37,7 @@ public class DocumentViewController {
     private I18nService i18nService;
 
     @GetMapping
-    public ModelAndView getByNameContains(DocumentRequest request, Pageable pageable) {
+    public ModelAndView getByCodeAndDateRange(DocumentRequest request, Pageable pageable) {
         Page<DocumentDto> model = documentFacade.getByCodeAndDateRange(request, pageable);
         return Views.from(Views.DOCUMENT_LIST, model);
     }

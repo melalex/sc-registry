@@ -20,41 +20,44 @@
 <nav aria-label="Page navigation" class="justify-content-center" th:if="${model.totalPages > 1}" th:fragment="pager">
     <ul id="pagination" class="pagination">
 
-        <li class="disabled" th:if="${model.isFirst}">
-            <a href="#" aria-label="Previous">
+        <li class="page-item disabled" th:if="${model.isFirst()}">
+            <a class="page-link" href="#" aria-label="Previous">
                 <span>&laquo;</span>
             </a>
         </li>
 
-        <li th:if="${model.hasPrevious}">
-            <a th:href="@{''(page = ${model.number} - 1, limmit = ${model.pageable.pageSize}, code = ${param.code})}"
+        <li class="page-item" th:if="${model.hasPrevious()}">
+            <a class="page-link"
+               th:href="@{''(page = ${model.number}, limit = ${model.pageable.pageSize}, code = ${param.code})}"
                aria-label="Previous">
                 <span>&laquo;</span>
             </a>
         </li>
 
-        <th:block th:each="i: ${#numbers.sequence(1, model.totalPages)}">
-            <li class="active" th:if="#{${model.pageable.pageNumber} == i}">
-                <span th:text="${i}">1</span>
+        <th:block th:each="i: ${#numbers.sequence(0, model.totalPages - 1)}">
+            <li class="page-item active" th:if="${model.pageable.pageNumber == i}">
+                <a class="page-link" href="#" th:text="${i + 1}">1</a>
             </li>
-            <li th:unless="#{${model.pageable.pageNumber} == i}">
-                <a th:href="@{/documents (page = ${i}, limmit = ${model.pageable.pageSize}, code = ${param.code})}"
-                   th:text="${i}">
+            <li class="page-item" th:unless="${model.pageable.pageNumber == i}">
+                <a class="page-link"
+                   th:href="@{/documents (page = ${i + 1}, limit = ${model.pageable.pageSize}, code = ${param.code})}"
+                   th:text="${i + 1}">
                     2
                 </a>
             </li>
 
         </th:block>
 
-        <li class="disabled" th:if="${model.isLast}">
-            <a href="#" aria-label="Previous">
+        <li class="page-item disabled" th:if="${model.isLast()}">
+            <a class="page-link" href="#" aria-label="Previous">
                 <span>&raquo;</span>
             </a>
         </li>
 
-        <li th:if="${model.hasNext}">
-            <a th:href="@{''(page = ${model.number} + 1, limmit = ${model.pageable.pageSize}, code = ${param.code})}"
-               aria-label="Previous">
+        <li class="page-item" th:if="${model.hasNext()}">
+            <a class="page-link"
+               th:href="@{''(page = ${model.number} + 2, limit = ${model.pageable.pageSize}, code = ${param.code})}"
+               aria-label="Next">
                 <span>&raquo;</span>
             </a>
         </li>
