@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -35,7 +36,7 @@
 
     <div class="row main">
         <div class="main-login main-center">
-            <form id="userForm" action="#" th:attr="data-create-url=@{/signUp}" method="post">
+            <form id="userForm" action="#" th:attr="data-create-url=@{/api/v1/user}" method="post">
 
                 <div class="form-group">
                     <label for="login" th:text="#{views.user.username}"></label>
@@ -68,7 +69,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="firstName" th:text="#{views.user.firstName}">First name</label>
+                    <label for="firstName" th:text="#{views.user.firstName}">First code</label>
                     <div>
                         <div class="input-group">
                             <input class="form-control" name="firstName" id="firstName"
@@ -78,7 +79,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="lastName" th:text="#{views.user.lastName}">Last name</label>
+                    <label for="lastName" th:text="#{views.user.lastName}">Last code</label>
                     <div>
                         <div class="input-group">
                             <input class="form-control" name="lastName" id="lastName"

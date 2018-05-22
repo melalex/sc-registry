@@ -1,8 +1,11 @@
 package com.fpm.registry.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class PlaceDto {
 
     private long id;
@@ -10,6 +13,11 @@ public class PlaceDto {
     private String canonicalName;
     private CountryDto country;
     private PlaceType type;
+
+    @JsonCreator
+    public PlaceDto(String canonicalName) {
+        this.canonicalName = canonicalName;
+    }
 
     public enum PlaceType {
         AIRPORT,

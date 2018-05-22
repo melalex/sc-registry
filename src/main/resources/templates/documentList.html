@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
 
@@ -37,16 +38,16 @@
     <div class="row">
         <div class="col-md-4">
             <form th:action="@{/documents}" class="form-inline" method="get">
-                <label class="sr-only" for="name" th:text="#{views.document.name}">Name</label>
-                <input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name"
-                       th:placeholder="#{views.action.search}">
+                <label class="sr-only" for="code" th:text="#{views.document.code}">Code</label>
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" name="code" id="code"
+                       th:placeholder="#{views.action.search}" th:value="${param.code}">
 
-                <button class="btn btn-primary search-button" th:text="#{views.action.search}">Search</button>
+                <button type="submit" class="btn btn-primary search-button" th:text="#{views.action.search}">Search</button>
             </form>
         </div>
         <div class="col-md-6"></div>
 
-        <div class="col-md-2">
+        <div class="col-md-2" sec:authorize="isAuthenticated()">
             <a class="btn btn-success search-button" href="#" th:href="@{/documents/create}"
                th:text="#{views.action.create}">
                 Create
@@ -62,9 +63,10 @@
         <thead>
         <tr>
             <th th:text="#{views.document.id}">Id</th>
-            <th th:text="#{views.document.name}">Name</th>
+            <th th:text="#{views.document.code}">Code</th>
             <th th:text="#{views.document.employee}">Employee</th>
             <th th:text="#{views.document.date}">Date</th>
+            <th th:text="#{views.action}" sec:authorize="isAuthenticated()">Action</th>
         </tr>
         </thead>
         <!--/*@thymesVar id="document" type="com.fpm.registry.dto.DocumentDto"*/-->
@@ -72,10 +74,15 @@
         <tr>
             <td th:text="${document.id}">1</td>
             <td>
-                <a th:href="@{/documents/{id}(id = ${document.id})}" th:text="#{views.document.name}">Name</a>
+                <a th:href="@{/documents/{id}(id = ${document.id})}" th:text="${document.code}">Code</a>
             </td>
             <td th:text="${document.employee.fullName}">John Johnson</td>
             <td th:text="${document.date}">04/22/2018</td>
+            <td sec:authorize="isAuthenticated()">
+                <form th:action="@{/documents/{id}/delete (id = ${document.id}, code = ${param.code}, page = ${param.page}, limit = ${param.limit})}" method="post">
+                    <button class="btn btn-danger" type="submit" th:text="#{views.action.delete}">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

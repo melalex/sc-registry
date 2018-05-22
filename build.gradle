@@ -61,6 +61,7 @@ dependencies {
     compile group: 'org.modelmapper', name: 'modelmapper', version: modelMapperVersion
     compile group: 'com.github.jmnarloch', name: 'modelmapper-spring-boot-starter', version: modelMapperStarterVersion
     compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: layoutDialectVersion
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
 
     compile group: 'org.webjars', name: 'jquery', version: jQueryVersion
     compile group: 'org.webjars', name: 'bootstrap', version: bootstrapVersion

@@ -38,11 +38,11 @@ public class DocumentApiController {
         return documentFacade.create(document);
     }
 
-    @PatchMapping
+    @PatchMapping("/{id:\\d+}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    @CacheEvict(value = Caches.SINGLE_DOCUMENT, key = "document.id")
-    public DocumentDto update(@Valid DocumentDto document) {
-        return documentFacade.update(document);
+    @CacheEvict(value = Caches.SINGLE_DOCUMENT, key = "id")
+    public DocumentDto update(@Valid @RequestBody DocumentForm document, @PathVariable long id) {
+        return documentFacade.update(document, id);
     }
 
     @DeleteMapping

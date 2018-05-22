@@ -3,6 +3,7 @@ package com.fpm.registry.facades.impl;
 import com.fpm.registry.annotations.Facade;
 import com.fpm.registry.domain.Document;
 import com.fpm.registry.dto.DocumentDto;
+import com.fpm.registry.dto.DocumentRequest;
 import com.fpm.registry.extensions.ExtendedMapper;
 import com.fpm.registry.facades.DocumentFacade;
 import com.fpm.registry.forms.DocumentForm;
@@ -44,8 +45,11 @@ public class DocumentFacadeImpl implements DocumentFacade {
 
     @Override
     @Transactional
-    public DocumentDto update(DocumentDto document) {
-        return extendedMapper.wrapEntity(document, Document.class, documentService::update);
+    public DocumentDto update(DocumentForm document, long id) {
+        Document toSave = extendedMapper.map(document, Document.class);
+        Document saved = documentService.update(toSave, id);
+
+        return extendedMapper.map(saved, DocumentDto.class);
     }
 
     @Override
@@ -63,9 +67,13 @@ public class DocumentFacadeImpl implements DocumentFacade {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<DocumentDto> getByNameContains(String name, Pageable pageable) {
-        return documentService.getByNameContains(name, pageable)
+    public Page<DocumentDto> getByCodeAndDateRange(DocumentRequest request, Pageable pageable) {
+        return documentService.getByCodeAndDateRange(request, pageable)
                 .map(extendedMapper.mapperFor(DocumentDto.class));
     }
 
+    @Override
+    public void delete(Long id) {
+        documentService.delete(id);
+    }
 }

@@ -26,7 +26,7 @@ public class MediaServiceImpl implements MediaService {
 
     private static final String INIT_MESSAGE =
             "Media service initialized successfully. File storage path is [{}], recycle bin path is [{}]";
-    private static final String DELETE_MESSAGE = "Deleting media [[{}]. Moved from [{}] to [{}]";
+    private static final String DELETE_MESSAGE = "Deleting media [ {} ] for [ {} ] document. Moved from [ {} ] to [ {} ]";
     private static final String NEW_MEDIA_MESSAGE = "Created new Media: {}";
 
     @NonNull
@@ -90,12 +90,13 @@ public class MediaServiceImpl implements MediaService {
         Path newPath = recycleBin.resolve(media.getName());
         Path oldPath = Paths.get(media.getPath());
 
-        media.setPath(newPath.toString());
-        media.setStatus(Media.Status.DELETED);
+        log.info(DELETE_MESSAGE, media.getId(), media.getDocument().getId(), oldPath, newPath);
 
         Files.move(oldPath, newPath);
 
-        log.info(DELETE_MESSAGE, media.getId(), oldPath, newPath);
+        media.setPath(newPath.toString());
+        media.setStatus(Media.Status.DELETED);
+        media.setDocument(null);
 
         mediaRepository.save(media);
     }

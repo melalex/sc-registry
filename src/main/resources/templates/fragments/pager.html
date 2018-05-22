@@ -27,9 +27,35 @@
         </li>
 
         <li th:if="${model.hasPrevious}">
-            <a th:href="@{''(page = ${model.number} - 1, limmit = ${model.size}, name = ${name})}"
+            <a th:href="@{''(page = ${model.number} - 1, limmit = ${model.pageable.pageSize}, code = ${param.code})}"
                aria-label="Previous">
                 <span>&laquo;</span>
+            </a>
+        </li>
+
+        <th:block th:each="i: ${#numbers.sequence(1, model.totalPages)}">
+            <li class="active" th:if="#{${model.pageable.pageNumber} == i}">
+                <span th:text="${i}">1</span>
+            </li>
+            <li th:unless="#{${model.pageable.pageNumber} == i}">
+                <a th:href="@{/documents (page = ${i}, limmit = ${model.pageable.pageSize}, code = ${param.code})}"
+                   th:text="${i}">
+                    2
+                </a>
+            </li>
+
+        </th:block>
+
+        <li class="disabled" th:if="${model.isLast}">
+            <a href="#" aria-label="Previous">
+                <span>&raquo;</span>
+            </a>
+        </li>
+
+        <li th:if="${model.hasNext}">
+            <a th:href="@{''(page = ${model.number} + 1, limmit = ${model.pageable.pageSize}, code = ${param.code})}"
+               aria-label="Previous">
+                <span>&raquo;</span>
             </a>
         </li>
 

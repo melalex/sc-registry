@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @UtilityClass
 public class Views {
@@ -29,8 +30,8 @@ public class Views {
         return new ModelAndView(view);
     }
 
-    public static ModelAndView redirectTo(String url) {
-        return redirectTo(url, List.of());
+    public String redirectTo(String url) {
+        return String.format(REDIRECT_FORMAT, url);
     }
 
     public ModelAndView redirectToIndex() {
@@ -42,6 +43,10 @@ public class Views {
     }
 
     public ModelAndView redirectTo(String view, List<String> messages) {
-        return new ModelAndView(String.format(REDIRECT_FORMAT, view), MESSAGES_ATTRIBUTE, messages);
+        return redirectTo(view, Map.of(MESSAGES_ATTRIBUTE, messages));
+    }
+
+    public ModelAndView redirectTo(String view, Map<String, Object> model) {
+        return new ModelAndView(redirectTo(view), model);
     }
 }

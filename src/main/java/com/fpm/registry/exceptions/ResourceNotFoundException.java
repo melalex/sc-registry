@@ -17,7 +17,7 @@ public class ResourceNotFoundException extends RuntimeException {
     private String fieldValue;
 
     public ResourceNotFoundException(String entityName, String fieldName, String fieldValue) {
-        super(String.format(NOT_FOUND_ERROR_MESSAGE, entityName, fieldName, fieldName));
+        super(String.format(NOT_FOUND_ERROR_MESSAGE, entityName, fieldName, fieldValue));
         this.entityName = entityName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;

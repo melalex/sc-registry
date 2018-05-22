@@ -1,6 +1,7 @@
 package com.fpm.registry.services;
 
 import com.fpm.registry.domain.Document;
+import com.fpm.registry.dto.DocumentRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,11 +15,13 @@ public interface DocumentService {
 
     void rollback(Long id);
 
-    Document update(Document document);
+    Document update(Document document, long id);
 
     File updateAttachment(Long id, String name, String type);
 
     Document getById(Long id);
 
-    Page<Document> getByNameContains(String name, Pageable pageable);
+    Page<Document> getByCodeAndDateRange(DocumentRequest request, Pageable pageable);
+
+    Document delete(Long id);
 }

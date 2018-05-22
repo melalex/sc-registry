@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
 
@@ -36,22 +37,15 @@
         <dt class="col-sm-3" th:text="#{views.document.id}">Id</dt>
         <dd class="col-sm-9" th:text="${model.id}">42</dd>
 
-        <dt class="col-sm-3" th:text="#{views.document.name}">Name</dt>
-        <dd class="col-sm-9" th:text="${model.name}">
-            Document name
+        <dt class="col-sm-3" th:text="#{views.document.code}">Name</dt>
+        <dd class="col-sm-9" th:text="${model.code}">
+            Document code
         </dd>
 
         <dt class="col-sm-3" th:text="#{views.document.description}">Description</dt>
         <dd class="col-sm-9" th:text="${model.description}">
             Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
             ut fermentum massa justo sit amet risus.
-        </dd>
-
-        <dt class="col-sm-3" th:text="#{views.document.tags}">Tags</dt>
-        <dd class="col-sm-9">
-            <th:block th:each="tag : ${model.tags}">
-                <span class="badge badge-primary" th:text="${tag}">Tag</span>
-            </th:block>
         </dd>
 
         <dt class="col-sm-3" th:text="#{views.document.place}">Place</dt>
@@ -65,14 +59,14 @@
 
         <dt class="col-sm-3" th:text="#{views.document.attachment}">Attachment</dt>
         <dd class="col-sm-9">
-            <a class="btn btn-info btn-sm" href="#"
+            <a class="btn btn-info btn-sm" href="#" target="_blank"
                th:href="@{/api/v1/media/{id}(id = ${model.attachment.id})}" th:text="#{views.action.download}">
                 Download
             </a>
         </dd>
     </dl>
 
-    <a class="btn btn-success btn-sm" href="#"
+    <a class="btn btn-success btn-sm" href="#" sec:authorize="isAuthenticated()"
        th:href="@{/documents/{id}/edit(id = ${model.id})}" th:text="#{views.action.edit}">
         Edit
     </a>

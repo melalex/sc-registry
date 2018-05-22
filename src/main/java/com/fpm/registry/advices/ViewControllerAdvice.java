@@ -43,7 +43,7 @@ public class ViewControllerAdvice {
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public ModelAndView handleUnexpectedException(UnauthorizedException exception) {
+    public String handleUnexpectedException(UnauthorizedException exception) {
         log.debug(HANDLED_UNAUTHORIZED_EXCEPTION, exception.getMessage());
 
         return Views.redirectTo(Urls.LOGIN);

@@ -12,7 +12,6 @@ $(document).ready(function () {
             type: 'post',
             cache: false,
             contentType: 'application/json',
-            dataType: 'json',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader(header, token);
             },

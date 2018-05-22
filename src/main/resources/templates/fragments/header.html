@@ -23,8 +23,18 @@
 
     <ul class="navbar-nav mr-sm-2" sec:authorize="isAuthenticated()">
         <li class="nav-item">
-            <a class="nav-link" href="#" th:href="@{/logout}" th:text="#{views.action.logout}">
-                Logout
+            <form th:action="@{/logout}" method="post">
+                <a onclick="this.parentNode.submit()" class="nav-link" href="#" th:text="#{views.action.logout}">
+                    Logout
+                </a>
+            </form>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav mr-sm-2" sec:authorize="not isAuthenticated()">
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/signIn}" th:text="#{views.forms.signIn}">
+                Login
             </a>
         </li>
     </ul>

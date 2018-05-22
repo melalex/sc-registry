@@ -35,12 +35,12 @@
           th:attr="data-document-id=${model?.id}">
 
         <div class="form-group">
-            <label for="name" th:text="#{views.document.name}">
-                Name
+            <label for="code" th:text="#{views.document.code}">
+                Code
             </label>
-            <input class="form-control" name="name" id="name"
-                   th:placeholder="#{views.document.name}"
-                   th:value="${model?.name}"/>
+            <input class="form-control" name="code" id="code"
+                   th:placeholder="#{views.document.code}"
+                   th:value="${model?.code}"/>
         </div>
 
         <div class="form-group">
@@ -54,22 +54,13 @@
         </div>
 
         <div class="form-group">
-            <label for="tags" th:text="#{views.document.tags}">
-                Tags
-            </label>
-            <input class="form-control" name="tags" id="tags"
-                   th:placeholder="#{views.document.tags}"
-                   th:value="${#strings.listJoin(model?.tags, ' ')}">
-        </div>
-
-        <div class="form-group">
             <label for="place" th:text="#{views.document.place}">
                 Place
             </label>
             <input class="typeahead form-control" name="place" id="place" data-provide="typeahead"
                    th:attr="data-autocomplete-source=@{/api/v1/places}"
                    th:placeholder="#{views.document.place}"
-                   th:value="${model?.place.canonicalName}">
+                   th:value="${model?.place?.canonicalName}">
         </div>
 
         <div class="form-group">
@@ -77,8 +68,7 @@
                 Attachment
             </label>
             <input type="file" accept="application/pdf" class="form-control" name="attachment" id="attachment"
-                   th:placeholder="#{views.document.attachment}"
-                   th:value="${model?.tags}">
+                   th:placeholder="#{views.document.attachment}">
         </div>
 
         <input class="btn btn-primary" type="submit"

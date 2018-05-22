@@ -64,9 +64,8 @@ function DocumentCommand(id) {
                 xhr.setRequestHeader(that.header, that.token);
             },
             data: JSON.stringify({
-                name: $('#name').val(),
+                code: $('#code').val(),
                 description: $('#description').val(),
-                tags: $('#tags').val().split(" "),
                 place: $('#place').val()
             }),
             success: function (data) {
@@ -79,7 +78,7 @@ function DocumentCommand(id) {
 
     const editDocument = function () {
         $.ajax({
-            url: '/api/v1/documents',
+            url: `/api/v1/documents/${that.documentId}`,
             cache: false,
             type: 'patch',
             contentType: 'application/json',
@@ -88,15 +87,15 @@ function DocumentCommand(id) {
                 xhr.setRequestHeader(that.header, that.token);
             },
             data: JSON.stringify({
-                id: that.documentId,
-                name: $('#name').val(),
+                code: $('#code').val(),
                 description: $('#description').val(),
-                tags: $('#tags').val().split(" "),
                 place: $('#place').val()
             }),
             success: function (data) {
                 if (!data.attachment || $('#attachment').get(0).files.length) {
                     createMedia()
+                } else {
+                    commit()
                 }
             },
             error: that.customErrorHandler.handle

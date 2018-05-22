@@ -40,7 +40,7 @@ public class Media {
     private String type;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "document_id", nullable = false)
+    @JoinColumn(name = "document_id")
     private Document document;
 
     public enum Status {
